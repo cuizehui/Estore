@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+    tools:context="com.example.cuizehui.estore.MainActivity">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_activity_vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </android.support.v4.view.ViewPager>
+
+<RadioGroup
+    android:id="@+id/main_activity_radio_group"
+    android:layout_gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    >
+    <RadioButton
+        android:text="@string/radiobutton1"
+        style="@style/RadioButtonstyle"
+        android:id="@+id/main_activity_home_rbt"
+         android:drawableTop="@drawable/mian_home"
+        />
+    <RadioButton
+        android:text="@string/radiobutton2"
+        style="@style/RadioButtonstyle"
+        android:id="@+id/main_activity_shop_rbt"
+          android:drawableTop="@drawable/mian_shop"
+        />
+    <RadioButton
+        android:text="@string/radiobutton3"
+        style="@style/RadioButtonstyle"
+        android:id="@+id/main_activity_order_rbt"
+         android:drawableTop="@drawable/mian_order"/>
+    <RadioButton
+        android:text="@string/radiobutton4"
+        style="@style/RadioButtonstyle"
+        android:id="@+id/main_activity_mine_rbt"
+         android:drawableTop="@drawable/main_mine"
+        />
+</RadioGroup>
+
+</LinearLayout>

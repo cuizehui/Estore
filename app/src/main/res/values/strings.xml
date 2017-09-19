@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Estore</string>
+
+    <string name="title_activity_base">BaseActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="radiobutton1">首页 </string>
+    <string name="radiobutton2">购物 </string>
+    <string name="radiobutton3">订单 </string>
+    <string name="radiobutton4">我的 </string>
+    <string name="to_login"> 点击登录</string>
+</resources>
