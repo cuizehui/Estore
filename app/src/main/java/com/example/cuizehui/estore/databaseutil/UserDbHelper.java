@@ -15,6 +15,14 @@ public class UserDbHelper extends SQLiteOpenHelper {
             "  userphone    string  primary key  ," +
             //用户密码
             "  userKeyword  string  )";
+    //用户购物车表
+    final  String CREATE_UserShopCar_TABLE="create TABLE usershopcar(" +
+            //用户名
+            "  userphone    string  primary key  ," +
+            //商品名
+            " productname  string " +
+            //商品个数
+            " number string  )";
 
 
     public UserDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -25,6 +33,9 @@ public class UserDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
       // 用户表
              sqLiteDatabase.execSQL(CREATE_USER_TABLE);
+
+        //用户购物车表
+             sqLiteDatabase.execSQL(CREATE_UserShopCar_TABLE);
 
 
 

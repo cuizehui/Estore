@@ -146,6 +146,23 @@ public class MainActivity extends BaseActivity {
             }.start();
 
         }
+
+
+        User user = MyApplication.getInstance(this).getUser();
+        if (user != null) {
+            //跳转至目标Activity
+            if (MyApplication.getInstance(this).getIntent() == null) {
+
+            }
+            else {
+                MyApplication.getInstance(this).jumpToTargetActivity(this);
+            }
+        }
+        else {
+
+        }
+
+
     }
 
 

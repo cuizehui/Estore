@@ -19,7 +19,7 @@ android {
         }
     }
     //dagger2和butterknife冲突
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
@@ -35,28 +35,20 @@ dependencies {
     })
 
 
-   /* apt 'com.google.dagger:dagger-compiler:2.10-rc4'
-*/
-    //dagger2
-    apt 'com.google.dagger:dagger-compiler:2.0'
+    compile 'com.facebook.fresco:webpsupport:0.12.0'
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    compile 'com.facebook.fresco:animated-gif:0.12.0'
+    compile 'com.facebook.fresco:animated-webp:0.12.0'
+    compile 'com.facebook.fresco:webpsupport:0.12.0'
     compile 'com.google.dagger:dagger:2.0'
-
-
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-v4:26.+'
-
-    //butterknife
     compile 'com.jakewharton:butterknife:8.8.1'
-    /*annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-*/
-    //只需要改这一句
-    apt 'com.jakewharton:butterknife-compiler:+'
-
-    // circleimagerview
     compile 'de.hdodenhof:circleimageview:2.1.0'
-
     testCompile 'junit:junit:4.12'
+    apt 'com.google.dagger:dagger-compiler:2.0'
+    apt 'com.jakewharton:butterknife-compiler:+'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 }

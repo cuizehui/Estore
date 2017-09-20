@@ -1,5 +1,6 @@
 package com.example.cuizehui.estore.base;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,7 @@ import com.example.cuizehui.estore.activity.LoginActivity;
 import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 
-public  abstract class BaseActivity extends AppCompatActivity {
+public  abstract class BaseActivity extends Activity {
 
 
 
@@ -44,7 +45,7 @@ public  abstract class BaseActivity extends AppCompatActivity {
             if (user != null) {
                 super.startActivityForResult(intent,requestCode);
             } else {
-              Log.d("is else",""+isNeedLogin);
+                MyApplication.getInstance(this).putIntent(intent);
                 Intent loginIntent = new Intent(this, LoginActivity.class);
                 super.startActivityForResult(loginIntent,requestCode);
             }
@@ -64,7 +65,7 @@ public  abstract class BaseActivity extends AppCompatActivity {
                 super.startActivity(intent);
             } else {
 
-         //       MyApplication.getInstance(this).putIntent(intent);
+                MyApplication.getInstance(this).putIntent(intent);
                 Intent loginIntent = new Intent(this, LoginActivity.class);
                 super.startActivity(loginIntent);
 
@@ -73,7 +74,6 @@ public  abstract class BaseActivity extends AppCompatActivity {
         } else {
             super.startActivity(intent);
         }
-        super.startActivity(intent);
     }
 
 /*// setResult  二次进入界面时  为了得到回传的intent

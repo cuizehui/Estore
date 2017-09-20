@@ -1,14 +1,12 @@
 package com.example.cuizehui.estore.module;
 
-import android.util.Log;
-
 import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.PreActivity;
 import com.example.cuizehui.estore.adapter.MainViewPagerAdapter;
 import com.example.cuizehui.estore.viewpagers_views.BasePagerView;
 import com.example.cuizehui.estore.viewpagers_views.HomepagerView;
 import com.example.cuizehui.estore.viewpagers_views.MinePagerView;
-import com.example.cuizehui.estore.viewpagers_views.OrderPagerView;
+import com.example.cuizehui.estore.viewpagers_views.ShopCarView;
 import com.example.cuizehui.estore.viewpagers_views.ShopPagerView;
 
 import java.util.ArrayList;
@@ -46,7 +44,7 @@ public class MainActivityModule {
         ArrayList<BasePagerView>   pagerViews=new ArrayList<>();
         pagerViews.add(new HomepagerView(mainActivity));
         pagerViews.add(new ShopPagerView(mainActivity));
-        pagerViews.add(new OrderPagerView(mainActivity));
+        pagerViews.add(new ShopCarView(mainActivity));
         pagerViews.add(new MinePagerView(mainActivity));
 
         return  pagerViews;

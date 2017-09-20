@@ -54,7 +54,7 @@ public class UserDb {
         return ret;
     }
 
-    /**
+    /**向用户表
      * 根据用户名获取到所有用户信息的游标集合
      * @param userphone 用户名
      * @return
@@ -65,7 +65,7 @@ public class UserDb {
 
     }
 
-    /**
+    /**向用户表
      * 查询用户名所对应的密码
      * @param  userPhone 用户名
      */
@@ -88,7 +88,7 @@ public class UserDb {
     }
 
     /**
-     *
+     *向用户表
      * @param要更新列的名 clumname 账户
      * @param要更新列的值 values  密码
      ×
@@ -109,4 +109,54 @@ public class UserDb {
         return ret;
     }
 
+
+   // 向购物车表插入
+   public long insertShopCarTable( String clumname, String values) {
+       long ret = 0;
+       db.beginTransaction();
+       try {
+           db.execSQL("insert into usermassage"+"("+clumname+") values( "+values+ ") ");
+           db.setTransactionSuccessful();
+       } catch (RuntimeException e) {
+           Log.e("insert error.",e.toString());
+       } finally {
+           db.endTransaction();
+       }
+       return ret;
+   }
+
+
+    /**
+     *向购物车表
+     * @param要更新列的名 clumname 账户
+     * @param要更新列的值 values
+    ×
+     * @return
+     */
+    public long updataShopCarTable( String updateclumname, String  updatevalues,String catchclumname,String catchvalues ) {
+        long ret = 0;
+        db.beginTransaction();
+        try {
+            //
+            db.execSQL("update usermassage set "+ updateclumname+" ="+"\""+updatevalues+"\""+"where "+catchclumname+"="+"\""+catchvalues+"\"");
+            db.setTransactionSuccessful();
+        } catch (RuntimeException e) {
+            Log.e("insert error.",e.toString());
+        } finally {
+            db.endTransaction();
+        }
+        return ret;
+    }
+
+
+   /** 查询购物车表所有信息
+     * 根据用户名获取到所有用户信息的游标集合
+     * @param userphone 用户名
+     * @return
+    */
+    public Cursor selectShopCarMessage(String userphone){
+        Cursor cursor= db.rawQuery("select * from usershopcar where userphone =?",new String[]{String.valueOf(userphone)});
+        return cursor;
+
+    }
 }

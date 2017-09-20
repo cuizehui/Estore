@@ -2,6 +2,7 @@ package com.example.cuizehui.estore;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.example.cuizehui.estore.databaseutil.UserDb;
@@ -10,6 +11,7 @@ import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 //import com.example.cuizehui.estore.interfaces.DaggerApplicationComponent;
 import com.example.cuizehui.estore.interfaces.DaggerApplicationComponent;
 import com.example.cuizehui.estore.module.ApplicationModule;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
  * Created by cuizehui on 17-9-13.
@@ -28,7 +30,7 @@ public class MyApplication extends Application
             super.onCreate();
 
             initAppComponent();
-
+            Fresco.initialize(this);
         }
 
 
@@ -61,6 +63,22 @@ public class MyApplication extends Application
     public  UserDb getUserDatedb(){
         UserDb userDb=UserDb.getInstance(this);
               return userDb;
+    }
+
+    private Intent intent;
+
+    public void putIntent(Intent intent) {
+        this.intent = intent;
+    }
+
+    public Intent getIntent() {
+        return this.intent;
+    }
+    //跳转至目标activity
+    public void jumpToTargetActivity(Context context) {
+
+        context.startActivity(intent);
+        this.intent = null;
     }
 
 }

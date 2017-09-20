@@ -23,7 +23,13 @@ import butterknife.ButterKnife;
 
 public class HomeViewpagerLVAdapter extends BaseAdapter {
     public ArrayList<ShopDaTa> shopDATAsarrayList;
+
     Context context;
+
+    public ArrayList<ShopDaTa> getShopDATAsarrayList() {
+        return shopDATAsarrayList;
+    }
+
     public HomeViewpagerLVAdapter(ArrayList<ShopDaTa> arrayList, MainActivity context) {
         super();
         this.context=context;
@@ -50,27 +56,36 @@ public class HomeViewpagerLVAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        ShopDaTa shopDaTa= shopDATAsarrayList.get(i);
 
+
+        LayoutInflater layoutInflater=LayoutInflater.from(context);
         ViewHolder holder;
+
         if (view != null) {
             holder = (ViewHolder) view.getTag();
-        } else {
-
-            LayoutInflater layoutInflater=LayoutInflater.from(context);
+        }
+        else {
 
             view =layoutInflater.inflate(R.layout.shop_data_layout,null);
             holder = new ViewHolder(view);
+
+         //   holder.textView =view.findViewById(R.id.productName_tV);
+
             view.setTag(holder);
         }
 
-       return view;
+        holder.textView.setText(shopDaTa.getProductName().toString());
+
+        return view;
 
     }
     //在holder中绑定
     static class ViewHolder {
-
+         @BindView(R.id.productName_tV)
+         TextView textView;
         public ViewHolder(View view) {
-            ButterKnife.bind(this, view);
+           ButterKnife.bind(this, view);
         }
     }
 

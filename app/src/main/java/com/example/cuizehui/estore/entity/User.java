@@ -11,7 +11,8 @@ public class User {
 
     String nicheng, password, telPhone, email, touxiang, touxiangMin, addressTreeIds, selfInfo ;
     String zhiye, aihao, jiatingzhuzhi;
-
+    //购物车数据库地址
+    String shopcarDB;
 
     public String getAccount() {
         return account;
