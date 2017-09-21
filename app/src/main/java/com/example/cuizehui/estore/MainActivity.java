@@ -19,6 +19,7 @@ import com.example.cuizehui.estore.interfaces.MainActivityComponent;
 import com.example.cuizehui.estore.module.MainActivityModule;
 import com.example.cuizehui.estore.uitls.Contants;
 import com.example.cuizehui.estore.viewpagers_views.MinePagerView;
+import com.example.cuizehui.estore.viewpagers_views.ShopCarView;
 
 
 import javax.inject.Inject;
@@ -124,8 +125,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("执行回调","1");
+        final User user = MyApplication.getInstance(this).getUser();
 
         if (requestCode == Contants.REQUEST_CODE && resultCode == this.RESULT_OK) {
+
+            Log.d("登录后 执行回调","ture");
 
             new Thread() {
                 public void run() {
@@ -136,9 +140,51 @@ public class MainActivity extends BaseActivity {
                         public void run() {
                             //通知子view g
 
-                            MinePagerView minePagerView= (MinePagerView) mainViewPagerAdapter.getPagerViewArrayList().get(3);
-                            minePagerView.initView();
-                            mainViewPagerAdapter.notifyDataSetChanged();
+                            if (user != null) {
+
+                                //更新我的
+                                MinePagerView minePagerView= (MinePagerView) mainViewPagerAdapter.getPagerViewArrayList().get(3);
+                                minePagerView.initView();
+
+                                minePagerView.initEvent();
+                                mainViewPagerAdapter.notifyDataSetChanged();
+
+                                //更新购物车
+                               refrushShopCarView();
+
+                            }
+                            else {
+
+                            }
+
+
+                        }
+
+                    });
+                }
+            }.start();
+
+        }
+        if (requestCode == 2 && resultCode == 2) {
+
+            Log.d("购物车执行回调","ture");
+
+            new Thread() {
+                public void run() {
+                    //这儿是耗时操作，完成之后更新UI；
+                    runOnUiThread(new Runnable(){
+
+                        @Override
+                        public void run() {
+                            //通知子view g
+                            if(user!=null)
+                            {
+                                 refrushShopCarView();
+                            }
+                            else {
+
+                            }
+
                         }
 
                     });
@@ -147,9 +193,7 @@ public class MainActivity extends BaseActivity {
 
         }
 
-
-        User user = MyApplication.getInstance(this).getUser();
-        if (user != null) {
+         if (user != null) {
             //跳转至目标Activity
             if (MyApplication.getInstance(this).getIntent() == null) {
 
@@ -163,6 +207,14 @@ public class MainActivity extends BaseActivity {
         }
 
 
+    }
+    //刷新购物车
+    public void refrushShopCarView(){
+        ShopCarView shopCarView= (ShopCarView) mainViewPagerAdapter.getPagerViewArrayList().get(2);
+        shopCarView.initDate();
+        shopCarView.initView();
+
+        mainViewPagerAdapter.notifyDataSetChanged();
     }
 
 

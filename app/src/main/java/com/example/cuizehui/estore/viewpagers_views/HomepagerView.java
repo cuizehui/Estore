@@ -88,8 +88,8 @@ public class HomepagerView extends BasePagerView {
                Bundle mBundle = new Bundle();
                mBundle.putSerializable("shopData",shopDaTa);
                intent.putExtras(mBundle);
-
-               mainActivity.startActivityForResult(intent,true,0);
+               //请求码是2
+               mainActivity.startActivityForResult(intent,true,2);
            }
        });
 

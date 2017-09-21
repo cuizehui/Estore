@@ -3,9 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background"
-    tools:showIn="@layout/fragment_mine">
+    android:layout_height="220dp"
+    android:background="@drawable/background">
 
 <ImageView
     android:layout_width="wrap_content"
@@ -23,7 +22,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/mine_tt_settings_iv"
+        android:id="@+id/mine_logoutiv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/largerPadding"

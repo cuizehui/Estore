@@ -18,11 +18,12 @@ public class UserDbHelper extends SQLiteOpenHelper {
     //用户购物车表
     final  String CREATE_UserShopCar_TABLE="create TABLE usershopcar(" +
             //用户名
-            "  userphone    string  primary key  ," +
+            "  userphone    string," +
             //商品名
-            " productname  string " +
+            "productname  string," +
             //商品个数
-            " number string  )";
+            "number string," +
+            "storename string, primary key(userphone,productname))";
 
 
     public UserDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
