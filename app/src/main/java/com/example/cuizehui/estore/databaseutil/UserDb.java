@@ -232,6 +232,12 @@ public class UserDb {
 
     }
 
+    /**
+     * 返回购物车产品个数
+     * @param userphone
+     * @param productname
+     * @return
+     */
     public String Productnumber(String userphone, String productname) {
         Cursor cursor = selectPdfromShopCar(userphone, productname);
         if (cursor.getCount() != 0) {
@@ -249,4 +255,15 @@ public class UserDb {
 
 
     }
+
+    /**
+     * 查询购物车所有产品数据 并按照商店名进行排序 同类归类
+    * @return
+     */
+    public Cursor selectPdOrderByShopName(String userphone){
+        Cursor cursor = db.rawQuery("select * from usershopcar  where userphone =?  order BY productname",new String[]{String.valueOf(userphone)});
+        Log.d("查询购物车数据验证", "返回行和列的个数" + cursor.getCount() + cursor.getColumnCount());
+        return cursor;
+    }
+
 }

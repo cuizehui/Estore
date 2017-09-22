@@ -30,9 +30,13 @@ import butterknife.BindView;
 
 public class ShopCarView extends  BasePagerView {
     
-   public  RecyclerView mRecyclerView;
-
+    public  RecyclerView mRecyclerView;
     ShopCarRecycleViewAdapter shopCarRecycleViewAdapter;
+
+    public UserDb userDb;
+    public ArrayList<ShopCarData> shopCarDatas;
+    public User user;
+
     public ShopCarView(MainActivity mainActivity) {
         super(mainActivity);
 
@@ -76,17 +80,23 @@ public class ShopCarView extends  BasePagerView {
     @Override
     public void initDate() {
         super.initDate();
-        User user= MyApplication.getInstance(mainActivity).getUser();
+       user= MyApplication.getInstance(mainActivity).getUser();
         Log.d("shopCarview","initdata1");
 
         //判断是否在登录状态
         if(user!=null){
             //拉取数据库 购物车商品信息
             Log.d("shopCarview","initdata2");
-            UserDb userDb= MyApplication.getInstance(mainActivity).getUserDatedb();
-            Cursor cursor= userDb.selectShopCarMessage(user.getAccount());
 
-            ArrayList<ShopCarData> shopCarDatas = userDb.passShopCarMessage(cursor);
+            //第一次登录如何处理这个view!!!!
+
+             userDb= MyApplication.getInstance(mainActivity).getUserDatedb();
+
+            //返回 按商店排序的数据集合
+
+            Cursor cursor= userDb.selectPdOrderByShopName(user.getAccount());
+
+            shopCarDatas = userDb.passShopCarMessage(cursor);
             Log.d("shopCarViewdata size",shopCarDatas.size()+"");
             //如果是0 说明没有购物车信息
             if(shopCarDatas.size()==0){
@@ -98,6 +108,7 @@ public class ShopCarView extends  BasePagerView {
             else {
                 //获取真数据
                 Log.d("",shopCarDatas.get(0).getProducename());
+                isSelectFirst(shopCarDatas);
                 shopCarRecycleViewAdapter=new ShopCarRecycleViewAdapter(mainActivity,shopCarDatas);
 
             }
@@ -112,13 +123,41 @@ public class ShopCarView extends  BasePagerView {
 
 
 
-
-        //recycleviewAdapter 生成，在这里 动态生成 同类商品个数view
-
     }
 
     @Override
     protected void initEvent() {
+        //全选事件 和结算事件
         super.initEvent();
+        shopCarRecycleViewAdapter.setOnEditClickListenter(new ShopCarRecycleViewAdapter.OnEditClickListenter() {
+            @Override
+            public void onEditClick(int postion, String productname, int count) {
+
+                Log.e("修改数量接口回调","111");
+                userDb.updataSCProductnunber(user.getAccount(),productname,count+"");
+            }
+        });
+    }
+
+
+    /**
+     * 给每个商品添加头属性
+     * @param list
+     */
+    public static void isSelectFirst(ArrayList<ShopCarData> list){
+        if(list.size() > 0) {
+            //头个商品一定属于它所在商铺的第一个位置，isFirst标记为1.
+            list.get(0).setIsFirst(1);
+
+            for (int i = 1; i < list.size(); i++) {
+                //每个商品跟它前一个商品比较，如果Shopid相同isFirst则标记为2，
+                //如果Shopid不同，isFirst标记为1.
+                if (list.get(i).getShopname().equals(list.get(i - 1).getShopname().toString())) {
+                    list.get(i).setIsFirst(2);
+                } else {
+                    list.get(i).setIsFirst(1);
+                }
+            }
+        }
     }
 }
