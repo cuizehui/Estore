@@ -33,6 +33,8 @@ public class ProductMessageActivity extends BaseActivity {
     TextView addshopcar_textView;
     @BindView(R.id.tv_good_detail_shop)
     TextView shopMessageTV;
+    @BindView(R.id.tv_good_detail_buy)
+    TextView butTV;
 
     private ShopDaTa shopDaTa;
 
@@ -121,6 +123,13 @@ public class ProductMessageActivity extends BaseActivity {
                startActivity(intent);
            }
        });
+        butTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentbuy=new Intent(ProductMessageActivity.this,SureOrderActivity.class);
+                startActivity(intentbuy);
+            }
+        });
     }
 
 

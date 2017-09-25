@@ -84,7 +84,7 @@
                     android:id="@+id/tv_item_shopcart_productname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="穿秋装情侣字母徽章风衣"
+                    android:text="name"
                     android:paddingLeft="@dimen/padding_10dp"
                     android:paddingTop="@dimen/padding_10dp"
                     />

@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import com.example.cuizehui.estore.adapter.MainViewPagerAdapter;
 import com.example.cuizehui.estore.base.BaseActivity;
 
+import com.example.cuizehui.estore.entity.NullUser;
 import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 import com.example.cuizehui.estore.interfaces.DaggerMainActivityComponent;
@@ -21,6 +22,10 @@ import com.example.cuizehui.estore.uitls.Contants;
 import com.example.cuizehui.estore.viewpagers_views.MinePagerView;
 import com.example.cuizehui.estore.viewpagers_views.ShopCarView;
 
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -57,6 +62,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind( this ) ;
+
+        EventBus.getDefault().register(this);
 
         initView();
         initData();
@@ -113,6 +120,7 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+
     }
     //依次设置每一个选择界面！！！
     public void switchViewpager(int i) {
@@ -141,13 +149,8 @@ public class MainActivity extends BaseActivity {
                             //通知子view g
 
                             if (user != null) {
-
-                                //更新我的
-                                MinePagerView minePagerView= (MinePagerView) mainViewPagerAdapter.getPagerViewArrayList().get(3);
-                                minePagerView.initView();
-
-                                minePagerView.initEvent();
-                                mainViewPagerAdapter.notifyDataSetChanged();
+                                //更新我de
+                                refrushMineView();
 
                                 //更新购物车
                                refrushShopCarView();
@@ -208,14 +211,48 @@ public class MainActivity extends BaseActivity {
 
 
     }
+    //刷新我的
+    public void refrushMineView(){
+        //更新我的
+        MinePagerView minePagerView= (MinePagerView) mainViewPagerAdapter.getPagerViewArrayList().get(3);
+        minePagerView.initView();
+
+        minePagerView.initEvent();
+        mainViewPagerAdapter.notifyDataSetChanged();
+
+    }
+
     //刷新购物车
     public void refrushShopCarView(){
         ShopCarView shopCarView= (ShopCarView) mainViewPagerAdapter.getPagerViewArrayList().get(2);
         shopCarView.initDate();
         shopCarView.initView();
+        shopCarView.initEvent();
 
         mainViewPagerAdapter.notifyDataSetChanged();
     }
 
+    //更新user
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(User user) {/* Do something */
+    MyApplication.getInstance(this).setUser(user);
+        Log.d("订阅时间执行","！！！");
+        refrushShopCarView();
+        refrushMineView();
+    };
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(NullUser nullUser){
+        refrushShopCarView();
+        refrushMineView();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //取消事件注册
+        EventBus.getDefault().unregister(this);
+    }
 
 }

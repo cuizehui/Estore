@@ -23,6 +23,8 @@ public class UserDbHelper extends SQLiteOpenHelper {
             "productname  string," +
             //商品个数
             "number string," +
+            //商品价格
+            "price string," +
             "storename string, primary key(userphone,productname))";
 
 

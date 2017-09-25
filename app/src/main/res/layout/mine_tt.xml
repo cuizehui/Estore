@@ -6,12 +6,14 @@
     android:layout_height="220dp"
     android:background="@drawable/background">
 
+<!--
 <ImageView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/largePadding"
     android:layout_marginTop="@dimen/middlePadding"
     android:src="@drawable/ic_m_code" />
+-->
 
 <LinearLayout
     android:layout_width="wrap_content"
@@ -28,10 +30,10 @@
         android:layout_marginRight="@dimen/largerPadding"
         android:src="@drawable/ic_m_setting" />
 
-    <ImageView
+   <!-- <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_m_share" />
+        android:src="@drawable/ic_m_share" />-->
 </LinearLayout>
 
 <LinearLayout
@@ -81,18 +83,7 @@
             android:src="@drawable/ic_m_vip" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn_style_shadow"
-        android:drawableRight="@drawable/ic_m_club_in"
-        android:paddingBottom="4dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="4dp"
-        android:text="V云俱乐部"
-        android:textColor="@color/white"
-        android:textSize="10sp" />
+
 
 </LinearLayout>
 
@@ -143,7 +134,7 @@
             android:id="@+id/mine_fansno_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="36"
+            android:text="0"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />

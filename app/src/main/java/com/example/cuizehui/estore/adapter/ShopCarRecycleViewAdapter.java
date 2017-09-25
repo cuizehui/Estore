@@ -14,6 +14,7 @@ import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.entity.ShopCarData;
 import com.example.cuizehui.estore.viewpagers_views.BasePagerView;
+import com.example.cuizehui.estore.viewpagers_views.ShopCarView;
 
 import java.util.ArrayList;
 
@@ -27,22 +28,26 @@ import butterknife.ButterKnife;
 public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecycleViewAdapter.ViewHolder>{
     private ArrayList<ShopCarData> shopCarDatas;
 
+
     private  MainActivity context;
+
+    private ShopCarView shopCarView;
 
     //删除接口
     private OnDeleteClickListener mOnDeleteClickListener;
 
     //操作数量的接口
     private OnEditClickListenter mOnEditClickListener;
+    private OnResfreshListener mOnResfreshListener;
 
     public ArrayList<ShopCarData> getShopCarDatas() {
         return shopCarDatas;
     }
 
-    public ShopCarRecycleViewAdapter(MainActivity context, ArrayList<ShopCarData> shopCarDatas) {
+    public ShopCarRecycleViewAdapter(MainActivity context, ArrayList<ShopCarData> shopCarDatas,ShopCarView shopCarView) {
         super();
 
-
+        this.shopCarView=shopCarView;
         this.shopCarDatas=shopCarDatas;
         this.context=context;
     }
@@ -88,6 +93,21 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
             holder.shopselect.setImageDrawable(context.getResources().getDrawable(R.drawable.shopcart_selected));
         }else {
             holder.shopselect.setImageDrawable(context.getResources().getDrawable(R.drawable.shopcart_unselected));
+        }
+
+//刷新回调
+        if(mOnResfreshListener != null){
+            boolean isSelect = false;
+            //返回一个是否全部选中的参数
+            for(int i = 0;i < shopCarDatas.size(); i++){
+                if(!shopCarDatas.get(i).isSelect()){
+                    isSelect = false;
+                    break;
+                }else{
+                    isSelect = true;
+                }
+            }
+            mOnResfreshListener.onResfresh(isSelect);
         }
 
 
@@ -151,22 +171,66 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
             public void onClick(View view) {
                 //
                 int number=Integer.parseInt(shopCarDatas.get(position).getNumber());
+                if(number>0){
+                    String producename=shopCarDatas.get(position).getProducename();
+                    number=number-1;
+                    if (mOnEditClickListener != null) {
+                        Log.d("mOnEditClick","1234");
+                        mOnEditClickListener.onEditClick( position,producename,number);
+                    }
+                    else {
+                        Log.d("mOnEditClick","null");
+
+                    }
+                    shopCarDatas.get(position).setNumber(number+"");
+                    notifyDataSetChanged();
+                }
+
+            }
+
+        });
+
+        holder.addIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int number=Integer.parseInt(shopCarDatas.get(position).getNumber());
                 String producename=shopCarDatas.get(position).getProducename();
-                number=number-1;
+                number=number+1;
                 if (mOnEditClickListener != null) {
-                     mOnEditClickListener.onEditClick( position,producename,number);
+                    Log.d("mOnEditClick","1234");
+                    mOnEditClickListener.onEditClick( position,producename,number);
+                }
+                else {
+                    Log.d("mOnEditClick","null");
+
                 }
                 shopCarDatas.get(position).setNumber(number+"");
                 notifyDataSetChanged();
-            }
 
+            }
+        });
+
+        holder.deleteIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //调用删除某个规格商品的接口
+                if(mOnDeleteClickListener != null){
+                    mOnDeleteClickListener.onDeleteClick(view,position,shopCarDatas.get(position).getProducename());
+                }
+
+                shopCarDatas.remove(position);
+                //重新排序，标记所有商品不同商铺第一个的商品位置
+                shopCarView.isSelectFirst(shopCarDatas);
+                notifyDataSetChanged();
+            }
         });
 
     }
 
     //提供删除接口
     public interface OnDeleteClickListener{
-        void onDeleteClick(View view, int position, int cartid);
+        void onDeleteClick(View view, int position, String productname);
     }
 
     public void setOnDeleteClickListener(OnDeleteClickListener mOnDeleteClickListener){
@@ -181,6 +245,14 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
         this.mOnEditClickListener =onEditClickListenter;
     }
 
+    //和Acitivity 交互的回调
+    public interface OnResfreshListener{
+        void onResfresh(boolean isSelect);
+    }
+
+    public void setResfreshListener(OnResfreshListener mOnResfreshListener){
+        this.mOnResfreshListener = mOnResfreshListener;
+    }
 
     @Override
     public int getItemCount() {
@@ -218,6 +290,9 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
         ImageView minusIV;
         @BindView(R.id.iv_item_shopcart_cloth_add)
         ImageView addIV;
+
+        @BindView(R.id.iv_item_shopcart_cloth_delete)
+        ImageView deleteIV;
 
 
         public ViewHolder(View view){

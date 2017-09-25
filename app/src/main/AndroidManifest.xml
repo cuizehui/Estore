@@ -24,7 +24,12 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegActivity" />
         <activity android:name=".activity.ProductMessageActivity" />
-        <activity android:name=".activity.ShopMessageAcitivity"></activity>
+        <activity android:name=".activity.ShopMessageAcitivity" />
+        <activity android:name=".activity.SureOrderActivity" />
+        <activity android:name=".activity.PersonalInfoActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.AdressMenagerActivity" />
+        <activity android:name=".activity.CreateAdressActivity"></activity>
     </application>
 
 </manifest>

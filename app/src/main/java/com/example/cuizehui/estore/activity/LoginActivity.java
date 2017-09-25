@@ -16,6 +16,9 @@ import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.databaseutil.UserDb;
 import com.example.cuizehui.estore.entity.User;
 
+import org.greenrobot.eventbus.EventBus;
+import org.litepal.LitePal;
+
 public class LoginActivity extends Activity  {
 
 
@@ -102,6 +105,12 @@ public class LoginActivity extends Activity  {
              }
 
              myApplication.setUser(user);
+             //并创建订单 和收货地址数据库表
+             LitePal.getDatabase();
+
+             //事件发布
+             EventBus.getDefault().post(user);
+
              setResult(RESULT_OK);
              finish();
          }

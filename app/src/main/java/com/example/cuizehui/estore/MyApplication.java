@@ -13,6 +13,8 @@ import com.example.cuizehui.estore.interfaces.DaggerApplicationComponent;
 import com.example.cuizehui.estore.module.ApplicationModule;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import org.litepal.LitePal;
+
 /**
  * Created by cuizehui on 17-9-13.
  */
@@ -31,6 +33,7 @@ public class MyApplication extends Application
 
             initAppComponent();
             Fresco.initialize(this);
+            LitePal.initialize(this);
         }
 
 

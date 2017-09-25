@@ -266,4 +266,13 @@ public class UserDb {
         return cursor;
     }
 
+    /***
+     *
+     */
+    public void deletePdinShopcar(String userphone,String  producetname){
+        db.execSQL("delete from usershopcar where userphone=? and productname=? ",new String[]{userphone,producetname});
+ //        db.execSQL("delete from usershopcar where userphone=? and productname=? ",new String[]{userphone,producetname});
+        Log.d("delete: ","delete from usershopcar where userphone="+"\""+userphone+" and productname="+producetname+"\"");
+    }
+
 }
