@@ -35,13 +35,13 @@ public class HomepagerViewModule {
         shopDaTa1.setProductName("商店A商品1");
         shopDaTa1.setPicadress("19.1");
         shopDaTa1.setShopName("商店A");
-        shopDaTa1.setPrice("图片地址1");
+        shopDaTa1.setPrice("13");
 
         ShopDaTa shopDaTa2=new ShopDaTa();
         shopDaTa2.setProductName("商店B商品2");
         shopDaTa2.setPicadress("19.2");
         shopDaTa2.setShopName("商店B");
-        shopDaTa2.setPrice("图片地址2");
+        shopDaTa2.setPrice("12");
 
 
 
@@ -49,7 +49,7 @@ public class HomepagerViewModule {
         shopDaTa3.setProductName("商店A商品3");
         shopDaTa3.setPicadress("19.3");
         shopDaTa3.setShopName("商店A");
-        shopDaTa3.setPrice("图片地址3");
+        shopDaTa3.setPrice("11");
 
 
 
@@ -57,14 +57,14 @@ public class HomepagerViewModule {
         shopDaTa4.setProductName("商店C商品4");
         shopDaTa4.setPicadress("19.4");
         shopDaTa4.setShopName("商店C");
-        shopDaTa4.setPrice("图片地址4");
+        shopDaTa4.setPrice("10");
 
 
         ShopDaTa shopDaTa5=new ShopDaTa();
         shopDaTa5.setProductName("商店B商品5");
         shopDaTa5.setPicadress("19.5");
         shopDaTa5.setShopName("商店B");
-        shopDaTa5.setPrice("图片地址5");
+        shopDaTa5.setPrice("9");
 
         arrayList.add(shopDaTa2);
         arrayList.add(shopDaTa1);

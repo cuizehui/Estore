@@ -56,7 +56,7 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(SettingActivity.this,PersonalInfoActivity.class);
-                startActivity(intent);
+                startActivity(intent,true);
             }
         });
     }

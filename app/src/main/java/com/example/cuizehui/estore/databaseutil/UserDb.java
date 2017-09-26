@@ -127,12 +127,12 @@ public class UserDb {
      * @param productname
      * @return
      */
-    public long insertShopCarTable(String username, String productname, String storename, String number) {
+    public long insertShopCarTable(String username, String productname, String storename, String number,String price) {
         long ret = 0;
         db.beginTransaction();
         try {
-            db.execSQL("insert into usershopcar" + "(userphone,productname,number,storename)values(" + username + ",'" + productname + "'" + "," + number + ",'" + storename + "') ");
-            Log.d("insert into usershopcar" + "(userphone,productname,number,storename)values(" + username + ",'" + productname + "'" + ",'" + storename + "'," + number + ") ", "end");
+            db.execSQL("insert into usershopcar" + "(userphone,productname,number,storename,price )values(" + username + ",'" + productname + "'" + "," + number + ",'" + storename + "'"+","+price+ ") ");
+            Log.d("insert into usershopcar" + "(userphone,productname,number,storename,price )values(" + username + ",'" + productname + "'" + ",'" + storename + "'," + number + ") ", "end");
             db.setTransactionSuccessful();
         } catch (RuntimeException e) {
             Log.e("insert error.", e.toString());
@@ -202,11 +202,13 @@ public class UserDb {
                 int columnstorename = shopCarDatacursor.getColumnIndex("storename");
                 String storename = shopCarDatacursor.getString(columnstorename);
 
+                int columnprice = shopCarDatacursor.getColumnIndex("price");
+                String price = shopCarDatacursor.getString(columnprice);
 
                 shopCarData.setProducename(producename);
                 shopCarData.setNumber(number);
                 shopCarData.setShopname(storename);
-
+                shopCarData.setPrice(price);
 
                 shopCarDatas.add(shopCarData);
             }

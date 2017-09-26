@@ -26,14 +26,14 @@
         android:background="@color/transparent"
         android:paddingTop="@dimen/spacing_normal">
 
-        <ImageView
+    <!--    <ImageView
             android:id="@+id/iv_good_detai_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/spacing_smallest"
             android:paddingLeft="@dimen/spacing_smaller"
             android:paddingRight="@dimen/spacing_small"
-            android:src="@drawable/grey_back" />
+            android:src="@drawable/grey_back" />-->
 
         <TextView
             android:paddingTop="@dimen/spacing_smallest"
@@ -54,20 +54,21 @@
             android:id="@+id/iv_good_detai_shop"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/iv_good_detai_share"
-            android:paddingLeft="@dimen/spacing_smaller"
-            android:src="@drawable/da_ren_all_shopping_cart" />
-
-        <ImageView
-            android:paddingTop="@dimen/spacing_smallest"
-            android:layout_marginLeft="@dimen/spacing_smallest"
-            android:id="@+id/iv_good_detai_share"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/spacing_smaller"
             android:paddingRight="@dimen/spacing_small"
-            android:src="@drawable/grey_share" />
+            android:src="@drawable/da_ren_all_shopping_cart" />
+      <!--  android:layout_toLeftOf="@+id/iv_good_detai_share"-->
+
+        <!--    <ImageView
+                android:paddingTop="@dimen/spacing_smallest"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:id="@+id/iv_good_detai_share"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="@dimen/spacing_smaller"
+                android:paddingRight="@dimen/spacing_small"
+                android:src="@drawable/grey_share" />-->
     </RelativeLayout>
 
     <LinearLayout

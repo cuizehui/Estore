@@ -13,6 +13,15 @@ public class ShopAdress  extends DataSupport{
     private  String shi;
     private  String qu;
     private  String dicAdress;
+    private  String isfirstAdress;
+
+    public String getIsfirstAdress() {
+        return isfirstAdress;
+    }
+
+    public void setIsfirstAdress(String isfirstAdress) {
+        this.isfirstAdress = isfirstAdress;
+    }
 
     public String getSdname() {
         return sdname;

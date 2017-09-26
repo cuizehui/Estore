@@ -1,13 +1,25 @@
 package com.example.cuizehui.estore.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by cuizehui on 17-9-21.
  */
 
-public class ShopCarData {
+public class ShopCarData  implements Serializable {
     private String shopname;
     private String producename;
     private String number;
+    private String price;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     //增加是不是isfirst 标记
     private int isFirst = 2;
 

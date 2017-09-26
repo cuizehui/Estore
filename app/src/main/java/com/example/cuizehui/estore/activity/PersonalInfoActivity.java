@@ -22,7 +22,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
+/**
+ * 个人信息（收货地址）Activity
+ */
 public class PersonalInfoActivity extends BaseActivity {
 
 
@@ -77,7 +79,7 @@ public class PersonalInfoActivity extends BaseActivity {
         receipLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(PersonalInfoActivity.this,CreateAdressActivity.class);
+                Intent intent =new Intent(PersonalInfoActivity.this,AdressMenagerActivity.class);
                 startActivity(intent);
             }
         });

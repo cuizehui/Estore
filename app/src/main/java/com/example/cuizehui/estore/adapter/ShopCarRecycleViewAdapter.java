@@ -67,6 +67,7 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
         holder.mTvshopname.setText(shopCarDatas.get(position).getShopname());
         holder.productname.setText(shopCarDatas.get(position).getProducename());
         holder.numberTV.setText(shopCarDatas.get(position).getNumber());
+        holder.poductprice.setText(shopCarDatas.get(position).getPrice());
 
         if (position > 0) {
             if (shopCarDatas.get(position).getShopname().equals(shopCarDatas.get(position - 1).getShopname())) {
@@ -293,6 +294,7 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
 
         @BindView(R.id.iv_item_shopcart_cloth_delete)
         ImageView deleteIV;
+
 
 
         public ViewHolder(View view){

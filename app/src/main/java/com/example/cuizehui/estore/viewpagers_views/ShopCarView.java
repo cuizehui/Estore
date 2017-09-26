@@ -46,6 +46,7 @@ public class ShopCarView extends  BasePagerView {
     private boolean mSelect=true;
      private TextView tvShopCartTotalNum;
     private TextView tvcommitOrder;
+    private TextView tv_shopcart_totalprice;
 
 
     public ShopCarView getShopCarView() {
@@ -79,6 +80,7 @@ public class ShopCarView extends  BasePagerView {
         tvShopCartSelect=shopcarview.findViewById(R.id.tv_shopcart_addselect);
 
         tvShopCartTotalNum=shopcarview.findViewById(R.id.tv_shopcart_totalnum);
+        tv_shopcart_totalprice=shopcarview.findViewById( R.id.tv_shopcart_totalprice);
 
         tvcommitOrder=shopcarview.findViewById(R.id.tv_shopcart_submit);
 
@@ -204,15 +206,16 @@ public class ShopCarView extends  BasePagerView {
                 }
                 //遍历集合 给后面的赋值
                 int mTotalNum = 0;
-
+                 int mTotalPrice=0;
                 for(int i = 0; i < shopCarDatas.size(); i++)
                     if(shopCarDatas.get(i).isSelect()) {
-                      //  mTotalPrice += Float.parseFloat(mAllOrder.get(i).getPrice()) * mAllOrderList.get(i).getCount();
+                       float  oneprice = Integer.parseInt(shopCarDatas.get(i).getPrice());
+                       float  number= Integer.parseInt(shopCarDatas.get(i).getNumber());
+                        mTotalPrice += oneprice * number;
                         mTotalNum += 1;
-                   //     mGoPayList.add(mAllOrderList.get(i));
                     }
                // mTotalPrice1 = mTotalPrice;
-                //tvShopCartTotalPrice.setText("总价：" + mTotalPrice);
+                tv_shopcart_totalprice.setText("总价：" + mTotalPrice);
                 tvShopCartTotalNum.setText("共" + mTotalNum + "件商品");
 
 
@@ -221,9 +224,21 @@ public class ShopCarView extends  BasePagerView {
         tvcommitOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startsureOrderActivity=new Intent(mainActivity, SureOrderActivity.class);
+                if(user!=null){
 
-                mainActivity.startActivity(startsureOrderActivity);
+                    Intent startsureOrderActivity=new Intent(mainActivity, SureOrderActivity.class);
+                    ArrayList<ShopCarData> selectShopCardata=new ArrayList<ShopCarData>();
+                    for(int i = 0; i < shopCarDatas.size(); i++)
+                        if(shopCarDatas.get(i).isSelect()) {
+                            selectShopCardata.add(shopCarDatas.get(i));
+                        }
+
+                    startsureOrderActivity.putExtra("dataBean",selectShopCardata);
+                    mainActivity.startActivity(startsureOrderActivity);
+
+
+
+                }
             }
         });
 

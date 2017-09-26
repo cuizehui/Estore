@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 产品信息Activity
+ */
 public class ProductMessageActivity extends BaseActivity {
 
     @BindView(R.id.shopname)
@@ -35,6 +38,8 @@ public class ProductMessageActivity extends BaseActivity {
     TextView shopMessageTV;
     @BindView(R.id.tv_good_detail_buy)
     TextView butTV;
+    @BindView(R.id.shopdata_price)
+    TextView price;
 
     private ShopDaTa shopDaTa;
 
@@ -67,7 +72,7 @@ public class ProductMessageActivity extends BaseActivity {
     //    Log.d("shopdata name",""+shopDaTa.getProductName());
 
         shopname_textView.setText(shopDaTa.getProductName());
-
+        price.setText(shopDaTa.getPrice());
 
     }
 
@@ -89,7 +94,7 @@ public class ProductMessageActivity extends BaseActivity {
 
                     String username =user.getAccount();
 
-
+                    String price=shopDaTa.getPrice();
                     String productname=shopDaTa.getProductName();
                     String shopname=shopDaTa.getShopName();
 
@@ -98,7 +103,7 @@ public class ProductMessageActivity extends BaseActivity {
                 int   i=Integer.parseInt(selectnumber);
                      if(i==0){
                         Log.d("数据库插入","");
-                        userDb.insertShopCarTable(username,productname,shopname,number+"");
+                        userDb.insertShopCarTable(username,productname,shopname,number+"",price);
                     }
                     else {
                         Log.d("数据库更新","");
@@ -127,6 +132,18 @@ public class ProductMessageActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intentbuy=new Intent(ProductMessageActivity.this,SureOrderActivity.class);
+
+                ShopCarData shopCarData=new ShopCarData();
+                shopCarData.setProducename(shopDaTa.getProductName());
+                shopCarData.setIsFirst(1);
+                shopCarData.setPrice(shopDaTa.getPrice());
+                shopCarData.setShopname(shopDaTa.getShopName());
+                shopCarData.setNumber("1");
+
+                ArrayList<ShopCarData> shopCarDatas=new ArrayList<ShopCarData>();
+                shopCarDatas.add(shopCarData);
+
+                intentbuy.putExtra("dataBean",shopCarDatas);
                 startActivity(intentbuy);
             }
         });
