@@ -13,6 +13,7 @@ import com.example.cuizehui.estore.adapter.SureOrderRecycleViewAdapter;
 import com.example.cuizehui.estore.base.BaseActivity;
 import com.example.cuizehui.estore.entity.ShopAdress;
 import com.example.cuizehui.estore.entity.ShopCarData;
+import com.example.cuizehui.estore.fragment.PayDetailFragment;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 
 import org.litepal.crud.DataSupport;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 确认订单 activity
@@ -42,6 +44,7 @@ public class SureOrderActivity extends BaseActivity {
             TextView payallprice;
     @BindView(R.id.pay_number)
             TextView pay_number;
+
 
 
     List<ShopAdress>  shopAdresses;
@@ -154,5 +157,11 @@ public class SureOrderActivity extends BaseActivity {
             initView();
             initEvent();
         }
+    }
+    @OnClick (R.id.pay_submit)
+    public  void payupPayfragment(){
+        PayDetailFragment payDetailFragment=new PayDetailFragment();
+        payDetailFragment.show(getSupportFragmentManager(),"payDetailFragment");
+
     }
 }

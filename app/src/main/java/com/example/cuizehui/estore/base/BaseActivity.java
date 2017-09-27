@@ -12,7 +12,7 @@ import com.example.cuizehui.estore.activity.LoginActivity;
 import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 
-public  abstract class BaseActivity extends Activity {
+public  abstract class BaseActivity extends AppCompatActivity {
 
 
 

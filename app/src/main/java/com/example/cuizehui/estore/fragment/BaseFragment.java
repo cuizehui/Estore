@@ -34,14 +34,17 @@ public class BaseFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
+
+    /**工厂类 创建此实例
+     *  当这个fragment 重绘时可以用来保存Bundle中所存的参数
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BaseFragment.
+     * @return A new instance of fragment OrderFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static BaseFragment newInstance(String param1, String param2) {
         BaseFragment fragment = new BaseFragment();

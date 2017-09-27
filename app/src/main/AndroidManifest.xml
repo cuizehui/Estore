@@ -29,7 +29,9 @@
         <activity android:name=".activity.PersonalInfoActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.AdressMenagerActivity" />
-        <activity android:name=".activity.CreateAdressActivity"></activity>
+        <activity android:name=".activity.CreateAdressActivity" />
+        <activity android:name=".activity.OrderActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

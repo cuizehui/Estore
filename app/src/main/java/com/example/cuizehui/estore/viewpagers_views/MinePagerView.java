@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.MyApplication;
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.activity.LoginActivity;
+import com.example.cuizehui.estore.activity.OrderActivity;
 import com.example.cuizehui.estore.activity.PersonalInfoActivity;
 import com.example.cuizehui.estore.activity.SettingActivity;
 import com.example.cuizehui.estore.entity.StringFlag;
@@ -27,14 +29,23 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MinePagerView extends BasePagerView {
 
+    private LinearLayout mineorderll;
+
     public MinePagerView(MainActivity mainActivity) {
         super(mainActivity);
     }
 
     TextView textView_Log;
     CircleImageView imgHead;
+    public    ImageView setting;
+
+
+
     User user;
-   public    ImageView setting;
+
+
+
+
 
     @Override
     public void initView() {
@@ -48,6 +59,8 @@ public class MinePagerView extends BasePagerView {
         imgHead=mineview.findViewById(R.id.img_head);
 
         setting =mineview.findViewById(R.id.mine_logoutiv);
+
+        mineorderll=mineview.findViewById(R.id.mineorder);
 
         basePager_fl.addView(mineview);
         Log.d("initview","-!-");
@@ -73,12 +86,23 @@ public class MinePagerView extends BasePagerView {
     @Override
     public void initEvent() {
         super.initEvent();
+        mineorderll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (user != null) {
+                    Intent  intentorder =new Intent(mainActivity, OrderActivity.class);
+                    mainActivity.startActivity(intentorder);
+                } else {
+                }
+            }
+        });
+
+
         textView_Log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                Intent intent =new Intent(mainActivity,LoginActivity.class);
-                 //0代表什么？
-                mainActivity.startActivityForResult(intent,false,0);
+                  mainActivity.startActivityForResult(intent,false,0);
             }
         });
 

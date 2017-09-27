@@ -31,6 +31,7 @@ public class BasePagerView {
         super();
 
         this.mainActivity=mainActivity;
+
         initDate();
         initView();
         initEvent();

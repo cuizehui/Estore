@@ -46,7 +46,8 @@ public class HomepagerView extends BasePagerView {
 
     @Override
     protected void initView() {
-        super.initView();
+         super.initView();
+
         LayoutInflater inflater =LayoutInflater.from(mainActivity);
         //绑定任意view
         View homeview=inflater.inflate(R.layout.main_viewpager_home,null);
