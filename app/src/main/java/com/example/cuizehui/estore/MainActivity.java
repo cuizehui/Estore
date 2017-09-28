@@ -13,6 +13,7 @@ import com.example.cuizehui.estore.adapter.MainViewPagerAdapter;
 import com.example.cuizehui.estore.base.BaseActivity;
 
 import com.example.cuizehui.estore.entity.NullUser;
+import com.example.cuizehui.estore.entity.StringFlag;
 import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 import com.example.cuizehui.estore.interfaces.DaggerMainActivityComponent;
@@ -245,6 +246,16 @@ public class MainActivity extends BaseActivity {
     public void onEvent(NullUser nullUser){
         refrushShopCarView();
         refrushMineView();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public  void onEvent(StringFlag stringFlag){
+        if(stringFlag.getFlag().equals("jumpshopcar")){
+            switchViewpager(2);
+        }
+        else {
+
+        }
     }
 
 

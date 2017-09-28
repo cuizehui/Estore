@@ -1,11 +1,13 @@
 package com.example.cuizehui.estore.entity;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by cuizehui on 17-9-25.
  */
 //订单对象
 
-public class OrderMessage {
+public class OrderMessage  extends DataSupport{
    private  String  orderid;
    private  String  username;
 

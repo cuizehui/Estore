@@ -97,6 +97,7 @@
                         android:textColor="@color/text_color_grey" />
 
                     <TextView
+                        android:id="@+id/pay_way_tt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -126,6 +127,7 @@
                         android:textColor="@color/text_color_grey" />
 
                     <TextView
+                        android:id="@+id/pay_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -152,6 +154,7 @@
                         android:text="需付款" />
 
                     <TextView
+                        android:id="@+id/needpay_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -176,15 +179,14 @@
             android:textColor="#ffffff" />
 
     </RelativeLayout>
-
     <!--=================================付款方式======================================-->
     <LinearLayout
         android:id="@+id/lin_pay_way"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/re_pay_detail"
         android:background="#ffffff"
         android:orientation="vertical"
+        android:layout_toRightOf="@+id/re_pay_detail"
         android:visibility="gone">
 
 
@@ -262,26 +264,47 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:src="@drawable/ic_pay_banlance_able"
                        />
 
                     <TextView
                         android:id="@+id/tv_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/img_balance"
                         android:layout_toRightOf="@+id/img_balance"
                         android:paddingLeft="10dp"
-                        android:text="账户余额"
+                        android:text="真支付"
                         android:textSize="13sp" />
 
-                    <TextView
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_balance2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:background="#ffffff"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/img_balance2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_balance"
-                        android:layout_toRightOf="@+id/img_balance"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_pay_banlance_able"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_balance2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/img_balance2"
+                        android:layout_toRightOf="@+id/img_balance2"
                         android:paddingLeft="10dp"
-                        android:text="可用活期账户500元"
-                        android:textSize="10sp" />
+                        android:text="假支付"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
             </LinearLayout>

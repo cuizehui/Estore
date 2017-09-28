@@ -1,16 +1,20 @@
 package com.example.cuizehui.estore.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.adapter.SureOrderRecycleViewAdapter;
 import com.example.cuizehui.estore.base.BaseActivity;
+import com.example.cuizehui.estore.entity.OrderMessage;
 import com.example.cuizehui.estore.entity.ShopAdress;
 import com.example.cuizehui.estore.entity.ShopCarData;
 import com.example.cuizehui.estore.fragment.PayDetailFragment;
@@ -19,6 +23,7 @@ import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,7 +33,7 @@ import butterknife.OnClick;
 /**
  * 确认订单 activity
  */
-public class SureOrderActivity extends BaseActivity {
+public class SureOrderActivity extends BaseActivity implements PayDetailFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.order_adress)
     TextView orderadressTV;
@@ -45,6 +50,8 @@ public class SureOrderActivity extends BaseActivity {
     @BindView(R.id.pay_number)
             TextView pay_number;
 
+    @BindView(R.id.edite)
+    Button btedite;
 
 
     List<ShopAdress>  shopAdresses;
@@ -147,12 +154,18 @@ public class SureOrderActivity extends BaseActivity {
     @Override
     protected void initEvent() {
         super.initEvent();
+        btedite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(SureOrderActivity.this,AdressMenagerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==4&&resultCode==3){
-            Log.d("执行订单回调","！！");
             initData();
             initView();
             initEvent();
@@ -160,8 +173,44 @@ public class SureOrderActivity extends BaseActivity {
     }
     @OnClick (R.id.pay_submit)
     public  void payupPayfragment(){
-        PayDetailFragment payDetailFragment=new PayDetailFragment();
+
+        PayDetailFragment payDetailFragment=PayDetailFragment.newInstance(payallprice.getText().toString(),"");
         payDetailFragment.show(getSupportFragmentManager(),"payDetailFragment");
 
+    }
+
+
+    //fragment  支付完成后回调
+    @Override
+    public void onFragmentInteraction(String uri) {
+            Log.d("支付完成后回调","！！"+uri);
+        //填写订单信息。。结束本次acitivity
+
+        makeOrder(uri);
+
+         finish();
+    }
+
+    //生成订单
+    private void makeOrder(String uri){
+        for(int i=0;i<shopCarDatas.size();i++){
+            ShopCarData shopCarData=  shopCarDatas.get(i);
+            OrderMessage orderMessage=new OrderMessage();
+
+            orderMessage.setOrderprice(shopCarData.getPrice());
+
+            orderMessage.setPdname(shopCarData.getProducename());
+            orderMessage.setPdnumber(shopCarData.getNumber());
+            Date    curDate    =   new Date(System.currentTimeMillis());
+            orderMessage.setOrderid(curDate.toString());
+            if(uri.equals("true")){
+                orderMessage.setOrderstatus("payed");
+            }
+            else {
+                orderMessage.setOrderstatus("waitpay");
+            }
+            orderMessage.save();
+
+        }
     }
 }

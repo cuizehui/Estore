@@ -17,8 +17,12 @@ import com.example.cuizehui.estore.base.BaseActivity;
 import com.example.cuizehui.estore.databaseutil.UserDb;
 import com.example.cuizehui.estore.entity.ShopCarData;
 import com.example.cuizehui.estore.entity.ShopDaTa;
+import com.example.cuizehui.estore.entity.StringFlag;
 import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
+import com.example.cuizehui.estore.widget.BottomBarView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -40,8 +44,12 @@ public class ProductMessageActivity extends BaseActivity {
     TextView butTV;
     @BindView(R.id.shopdata_price)
     TextView price;
+    @BindView(R.id.shopcar_icon)
+    BottomBarView bottomBarView;
 
     private ShopDaTa shopDaTa;
+    private UserDb userDb;
+    private User user;
 
 
     @Override
@@ -61,7 +69,16 @@ public class ProductMessageActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
+        //获取购物清单数量
+        UserDb userDb=MyApplication.getInstance(ProductMessageActivity.this).getUserDatedb();
+        Cursor cursor=userDb.selectShopCarMessage(user.getAccount());
+        int number= cursor.getCount();
 
+        try {
+            bottomBarView.add(number);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -73,6 +90,10 @@ public class ProductMessageActivity extends BaseActivity {
 
         shopname_textView.setText(shopDaTa.getProductName());
         price.setText(shopDaTa.getPrice());
+
+         userDb=MyApplication.getInstance(ProductMessageActivity.this).getUserDatedb();
+         user= MyApplication.getInstance(ProductMessageActivity.this).getUser();
+
 
     }
 
@@ -87,12 +108,9 @@ public class ProductMessageActivity extends BaseActivity {
 
                 number=number+1;
                   //database
-                   UserDb userDb=MyApplication.getInstance(ProductMessageActivity.this).getUserDatedb();
-                  //插入表 商品名 和商品个数 商家名（便于分类）
+                //插入表 商品名 和商品个数 商家名（便于分类）
 
-                   User user= MyApplication.getInstance(ProductMessageActivity.this).getUser();
-
-                    String username =user.getAccount();
+                String username =user.getAccount();
 
                     String price=shopDaTa.getPrice();
                     String productname=shopDaTa.getProductName();
@@ -114,6 +132,11 @@ public class ProductMessageActivity extends BaseActivity {
 
                     //执行动画
                     Toast.makeText(ProductMessageActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
+                try {
+                    bottomBarView.add();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                     setResult(2);
 
 
@@ -145,6 +168,19 @@ public class ProductMessageActivity extends BaseActivity {
 
                 intentbuy.putExtra("dataBean",shopCarDatas);
                 startActivity(intentbuy);
+            }
+        });
+
+        bottomBarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringFlag stringFlag=new StringFlag();
+
+                stringFlag.setFlag("jumpshopcar");
+                EventBus.getDefault().post(stringFlag);
+
+                finish();
+
             }
         });
     }

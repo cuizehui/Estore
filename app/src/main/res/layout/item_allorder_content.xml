@@ -26,7 +26,7 @@
             >
 
             <TextView
-                android:id="@+id/tv_item_allorder_title"
+                android:id="@+id/tv_orderitem_productname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_10dp"

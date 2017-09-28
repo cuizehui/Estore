@@ -37,15 +37,29 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content" />
        </LinearLayout>
-
-        <TextView
-            android:id="@+id/order_adress"
-            android:layout_marginLeft="10dp"
-            android:padding="5dp"
-            android:text="收货地址"
-            android:textSize="13dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/order_adress"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:text="收货地址"
+                android:textSize="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/edite"
+                android:layout_marginRight="18dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/etime"
+                android:gravity="bottom"
+                android:text="wew"
+                android:padding="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </RelativeLayout>
 
     </LinearLayout>
 

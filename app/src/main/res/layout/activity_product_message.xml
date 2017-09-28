@@ -49,15 +49,26 @@
             android:layout_gravity="center"
             android:text="商品详情" />
 
-        <ImageView
-            android:paddingTop="@dimen/spacing_smallest"
-            android:id="@+id/iv_good_detai_shop"
+
+        <com.example.cuizehui.estore.widget.BottomBarView
+            android:id="@+id/shopcar_icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/spacing_smaller"
             android:paddingRight="@dimen/spacing_small"
-            android:src="@drawable/da_ren_all_shopping_cart" />
-      <!--  android:layout_toLeftOf="@+id/iv_good_detai_share"-->
+            android:paddingTop="@dimen/spacing_smallest"
+            >
+
+        </com.example.cuizehui.estore.widget.BottomBarView>
+
+      <!--  <ImageView
+
+            android:id="@+id/iv_good_detai_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+              android:src="@drawable/da_ren_all_shopping_cart" />-->
+
+        <!--  android:layout_toLeftOf="@+id/iv_good_detai_share"-->
 
         <!--    <ImageView
                 android:paddingTop="@dimen/spacing_smallest"

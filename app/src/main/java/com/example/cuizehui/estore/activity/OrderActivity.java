@@ -59,7 +59,6 @@ public class OrderActivity extends AppCompatActivity implements BaseFragment.OnF
         initView();
         initEvent();
 
-
     }
 
 
@@ -88,7 +87,7 @@ public class OrderActivity extends AppCompatActivity implements BaseFragment.OnF
     private void initTab() {
 
 
-            mFragments.add(new OrderFragment());
+            mFragments.add(new OrderFragment(this));
             mFragments.add(new OrderPayedFragment());
             mFragments.add(new OrderNoPayFragment());
             mFragments.add(new OrderNoBBFragment());
