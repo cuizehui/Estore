@@ -2,7 +2,6 @@ package com.example.cuizehui.estore.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -12,9 +11,8 @@ import android.widget.Toast;
 import com.example.cuizehui.estore.MyApplication;
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.base.BaseActivity;
-import com.example.cuizehui.estore.entity.NullUser;
+import com.example.cuizehui.estore.entity.RefrushMain;
 import com.example.cuizehui.estore.entity.StringFlag;
-import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -74,13 +72,13 @@ public class SettingActivity extends BaseActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NullUser user=new NullUser();
+                RefrushMain refrushMainui=new RefrushMain();
                 MyApplication.getInstance(SettingActivity.this).setUser(null);
                 //设置文字为点击登录
                 //并刷新界面
                 Toast.makeText(SettingActivity.this,"已经退出登录",Toast.LENGTH_SHORT).show();
 
-                EventBus.getDefault().post(user);
+                EventBus.getDefault().post(refrushMainui);
 
 
                 StringFlag stringFlag=new StringFlag();

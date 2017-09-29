@@ -119,18 +119,13 @@ public class MinePagerView extends BasePagerView {
             }
         });
 
-       //退出登录
+       //设置
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent=new Intent(mainActivity, SettingActivity.class);
                 mainActivity.startActivity(intent);
-               MyApplication.getInstance(mainActivity).setUser(null);
-            //设置文字为点击登录
-            //并刷新界面
-             //   textView_Log.setText(R.string.to_login);
-
             }
         });
 

@@ -67,7 +67,7 @@ public class AdressMenagerActivity extends BaseActivity {
         super.initData();
 
         //获取到地址信息
-        shopAdresses= DataSupport.findAll(ShopAdress.class);
+        shopAdresses= DataSupport.where("username = ?",user.getAccount().toString()).find(ShopAdress.class);
 
         if(shopAdresses!=null){
             Log.d("AressMa sieze :", shopAdresses.size()+"");

@@ -3,8 +3,11 @@ package com.example.cuizehui.estore.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +29,7 @@ public class LoginActivity extends Activity  {
     TextView mEtxtPwd;
     Button loginButton;
     TextView mEtxtReg;
+    private MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +73,33 @@ public class LoginActivity extends Activity  {
         });
 
 
+
         mEtxtReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent  startRegIntent=new Intent(LoginActivity.this,RegActivity.class);
                   startActivity(startRegIntent);
+            }
+        });
+        mEtxtPwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                     if(TextUtils.isEmpty(mEtxtPhone.getText().toString())){
+                     }
+                     else {
+                         int color=getResources().getColor(R.color.colorstatus);
+                         loginButton.setBackgroundColor(color);
+                     }
             }
         });
     }
@@ -90,7 +116,7 @@ public class LoginActivity extends Activity  {
              Log.d("验证成功","登录");
              //将 user 对象所有信息复制给 全局user
              User user=new User();
-             MyApplication myApplication=MyApplication.getInstance(this);
+             myApplication=MyApplication.getInstance(this);
 
              Cursor cursor= userDb.selectUserMessage(phone);
              if(cursor.moveToFirst()){

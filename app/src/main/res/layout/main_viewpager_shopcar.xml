@@ -33,7 +33,12 @@
             android:layout_weight="1"
             android:layout_marginBottom="50dp"
             ></android.support.v7.widget.RecyclerView>
-
+         <ImageView
+             android:id="@+id/umpty_iv"
+             android:layout_gravity="center_horizontal"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:background="@drawable/umpty"/>
     </LinearLayout>
 
     <LinearLayout
@@ -65,7 +70,7 @@
 
             <TextView
                 android:id="@+id/tv_shopcart_totalprice"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding_10dp"
                 android:paddingTop="@dimen/padding_10dp"

@@ -12,7 +12,7 @@ import android.widget.RadioGroup;
 import com.example.cuizehui.estore.adapter.MainViewPagerAdapter;
 import com.example.cuizehui.estore.base.BaseActivity;
 
-import com.example.cuizehui.estore.entity.NullUser;
+import com.example.cuizehui.estore.entity.RefrushMain;
 import com.example.cuizehui.estore.entity.StringFlag;
 import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
@@ -122,7 +122,49 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
+        mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                    selectBotton(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
+
+    //处理底部按钮
+    private void selectBotton(int position) {
+        home_rbt.setChecked(false);
+        shop_rbt.setChecked(false);
+        mine_rbt.setChecked(false);
+        order_rbt.setChecked(false);
+        switch (position){
+           case 0:
+            home_rbt.setChecked(true);
+               break;
+            case 1:
+            shop_rbt.setChecked(true);
+            break;
+            case 2:
+            order_rbt.setChecked(true);
+            break;
+            case 3:
+            mine_rbt.setChecked(true);
+            break;
+        }
+
+    }
+
     //依次设置每一个选择界面！！！
     public void switchViewpager(int i) {
         //当前viewpager显示的界面
@@ -133,12 +175,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("执行回调","1");
+        Log.d("登录mainActivity执行回调","1");
         final User user = MyApplication.getInstance(this).getUser();
 
         if (requestCode == Contants.REQUEST_CODE && resultCode == this.RESULT_OK) {
 
-            Log.d("登录后 执行回调","ture");
+            Log.d("登录后mainActivity执行回调","ture");
 
             new Thread() {
                 public void run() {
@@ -150,18 +192,13 @@ public class MainActivity extends BaseActivity {
                             //通知子view g
 
                             if (user != null) {
-                                //更新我de
+                                //更新mine
                                 refrushMineView();
-
                                 //更新购物车
-                               refrushShopCarView();
-
+                                refrushShopCarView();
                             }
                             else {
-
                             }
-
-
                         }
 
                     });
@@ -186,9 +223,7 @@ public class MainActivity extends BaseActivity {
                                  refrushShopCarView();
                             }
                             else {
-
                             }
-
                         }
 
                     });
@@ -237,13 +272,13 @@ public class MainActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(User user) {/* Do something */
     MyApplication.getInstance(this).setUser(user);
-        Log.d("订阅时间执行","！！！");
+        Log.d("userUI回调执行","！！！");
         refrushShopCarView();
         refrushMineView();
     };
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(NullUser nullUser){
+    public void onEvent(RefrushMain RefrushMain){
         refrushShopCarView();
         refrushMineView();
     }
@@ -251,6 +286,7 @@ public class MainActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public  void onEvent(StringFlag stringFlag){
         if(stringFlag.getFlag().equals("jumpshopcar")){
+            refrushShopCarView();
             switchViewpager(2);
         }
         else {

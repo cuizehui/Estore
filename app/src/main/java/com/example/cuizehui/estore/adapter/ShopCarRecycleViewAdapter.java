@@ -63,7 +63,9 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Log.d(position+"isfirst",shopCarDatas.get(position).getIsFirst()+"");
+     //    Log.d("第"+position+"项数据获取是否isfirst",shopCarDatas.get(position).getIsFirst()+"");
+
+
         holder.mTvshopname.setText(shopCarDatas.get(position).getShopname());
         holder.productname.setText(shopCarDatas.get(position).getProducename());
         holder.numberTV.setText(shopCarDatas.get(position).getNumber());
@@ -96,7 +98,7 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
             holder.shopselect.setImageDrawable(context.getResources().getDrawable(R.drawable.shopcart_unselected));
         }
 
-//刷新回调
+       // 每次绘制 刷新  都会触发这个方法
         if(mOnResfreshListener != null){
             boolean isSelect = false;
             //返回一个是否全部选中的参数
@@ -108,7 +110,7 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
                     isSelect = true;
                 }
             }
-            mOnResfreshListener.onResfresh(isSelect);
+            mOnResfreshListener.onResfresh(isSelect,position);
         }
 
 
@@ -198,12 +200,9 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
                 String producename=shopCarDatas.get(position).getProducename();
                 number=number+1;
                 if (mOnEditClickListener != null) {
-                    Log.d("mOnEditClick","1234");
-                    mOnEditClickListener.onEditClick( position,producename,number);
+                     mOnEditClickListener.onEditClick( position,producename,number);
                 }
                 else {
-                    Log.d("mOnEditClick","null");
-
                 }
                 shopCarDatas.get(position).setNumber(number+"");
                 notifyDataSetChanged();
@@ -248,7 +247,7 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
 
     //和Acitivity 交互的回调
     public interface OnResfreshListener{
-        void onResfresh(boolean isSelect);
+        void onResfresh(boolean isSelect,int postion);
     }
 
     public void setResfreshListener(OnResfreshListener mOnResfreshListener){

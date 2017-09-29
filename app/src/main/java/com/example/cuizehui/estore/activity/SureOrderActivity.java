@@ -7,19 +7,25 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.cuizehui.estore.MyApplication;
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.adapter.SureOrderRecycleViewAdapter;
 import com.example.cuizehui.estore.base.BaseActivity;
+import com.example.cuizehui.estore.databaseutil.UserDb;
 import com.example.cuizehui.estore.entity.OrderMessage;
+import com.example.cuizehui.estore.entity.RefrushMain;
 import com.example.cuizehui.estore.entity.ShopAdress;
 import com.example.cuizehui.estore.entity.ShopCarData;
+import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.fragment.PayDetailFragment;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
 
+import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
@@ -58,7 +64,10 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
     private ShopAdress shopAdress;
     private SureOrderRecycleViewAdapter sureOrderRecycleViewAdapter;
     private ArrayList<ShopCarData> shopCarDatas;
+    private User user;
+    private UserDb userDb;
 
+    private String flagwhere;
     @Override
     protected void setupActivityComponent(ApplicationComponent appComponent) {
 
@@ -80,8 +89,11 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
     @Override
     protected void initData() {
         super.initData();
+        user=MyApplication.getInstance(this).getUser();
+        userDb= MyApplication.getInstance(SureOrderActivity.this).getUserDatedb();
+
         //获取到地址信息
-        shopAdresses= DataSupport.where("isfirstAdress = ?","true").find(ShopAdress.class);
+        shopAdresses= DataSupport.where("isfirstAdress = ? and  username= ?","true",user.getAccount()).find(ShopAdress.class);
 
             /*if(shopAdresses.size()==0){
             //第一次登录没有 设置过
@@ -105,9 +117,12 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
         //商品信息
 
         Intent intentGet = getIntent();
+
         if(intentGet!=null){
+            flagwhere=intentGet.getStringExtra("flag");
            shopCarDatas = (ArrayList<ShopCarData>) intentGet.getSerializableExtra("dataBean");
             sureOrderRecycleViewAdapter=new SureOrderRecycleViewAdapter(this,shopCarDatas);
+
         }
         else {
             Log.d("intent传入集合为空","！1");
@@ -165,11 +180,18 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("REQUEST_RESULTE",""+requestCode+"::"+resultCode);
+
         if(requestCode==4&&resultCode==3){
             initData();
             initView();
             initEvent();
         }
+
+        if(requestCode==4&&resultCode==5){
+             finish();
+        }
+
     }
     @OnClick (R.id.pay_submit)
     public  void payupPayfragment(){
@@ -184,10 +206,19 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
     @Override
     public void onFragmentInteraction(String uri) {
             Log.d("支付完成后回调","！！"+uri);
-        //填写订单信息。。结束本次acitivity
 
+       if(flagwhere.equals("buy")){
+        }
+        else
+            {
+
+            for(int i=0;i<shopCarDatas.size();i++){
+                userDb.deletePdinShopcar(user.getAccount(),shopCarDatas.get(i).getProducename());
+            }
+             RefrushMain refrushMain=new RefrushMain();
+            EventBus.getDefault().post(refrushMain);
+        }
         makeOrder(uri);
-
          finish();
     }
 
@@ -196,7 +227,7 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
         for(int i=0;i<shopCarDatas.size();i++){
             ShopCarData shopCarData=  shopCarDatas.get(i);
             OrderMessage orderMessage=new OrderMessage();
-
+            orderMessage.setUsername(user.getAccount());
             orderMessage.setOrderprice(shopCarData.getPrice());
 
             orderMessage.setPdname(shopCarData.getProducename());

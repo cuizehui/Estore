@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cuizehui.estore.MainActivity;
@@ -47,6 +48,7 @@ public class ShopCarView extends  BasePagerView {
      private TextView tvShopCartTotalNum;
     private TextView tvcommitOrder;
     private TextView tv_shopcart_totalprice;
+    private ImageView imptyi;
 
 
     public ShopCarView getShopCarView() {
@@ -73,6 +75,9 @@ public class ShopCarView extends  BasePagerView {
     @Override
     public void initView() {
         super.initView();
+
+
+
         LayoutInflater inflater =LayoutInflater.from(mainActivity);
         View shopcarview=inflater.inflate(R.layout.main_viewpager_shopcar,null);
         mRecyclerView=shopcarview.findViewById(R.id.shopcar_recyclerView);
@@ -82,6 +87,15 @@ public class ShopCarView extends  BasePagerView {
         tvShopCartTotalNum=shopcarview.findViewById(R.id.tv_shopcart_totalnum);
         tv_shopcart_totalprice=shopcarview.findViewById( R.id.tv_shopcart_totalprice);
 
+        imptyi=shopcarview.findViewById(R.id.umpty_iv);
+        if(shopCarDatas.size()==0){
+            imptyi.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            imptyi.setVisibility(View.GONE);
+
+        }
         tvcommitOrder=shopcarview.findViewById(R.id.tv_shopcart_submit);
 
         //设置布局管理器
@@ -95,6 +109,7 @@ public class ShopCarView extends  BasePagerView {
         //   mRecyclerView.addItemDecoration(new DividerItemDecoration(mainActivity, DividerItemDecoration.HORIZONTAL_LIST));
         basePager_fl.addView(shopcarview);
 
+
     }
 
 
@@ -104,45 +119,41 @@ public class ShopCarView extends  BasePagerView {
     public void initDate() {
         super.initDate();
        user= MyApplication.getInstance(mainActivity).getUser();
-        Log.d("shopCarview","initdata1");
+        //Log.d("shopCarview","initdata1");
 
         //判断是否在登录状态
         if(user!=null){
             //拉取数据库 购物车商品信息
-            Log.d("shopCarview","initdata2");
+          //  Log.d("shopCarview","initdata2");
 
-            //第一次登录如何处理这个view!!!!
 
-             userDb= MyApplication.getInstance(mainActivity).getUserDatedb();
+            userDb= MyApplication.getInstance(mainActivity).getUserDatedb();
 
             //返回 按商店排序的数据集合
-
             Cursor cursor= userDb.selectPdOrderByShopName(user.getAccount());
-
             shopCarDatas = userDb.passShopCarMessage(cursor);
             Log.d("shopCarViewdata size",shopCarDatas.size()+"");
+
             //如果是0 说明没有购物车信息
             if(shopCarDatas.size()==0){
                 //设置空数据
-                ArrayList<ShopCarData> shopCarnull =new ArrayList<>();
-                shopCarRecycleViewAdapter=new ShopCarRecycleViewAdapter(mainActivity,shopCarnull,shopCarView);
+               shopCarDatas=new ArrayList<>();
 
             }
             else {
-                //获取真数据
+                //获取真数据并排序
                 Log.d("",shopCarDatas.get(0).getProducename());
                 isSelectFirst(shopCarDatas);
-                shopCarRecycleViewAdapter=new ShopCarRecycleViewAdapter(mainActivity,shopCarDatas,shopCarView);
-
             }
+            shopCarRecycleViewAdapter=new ShopCarRecycleViewAdapter(mainActivity,shopCarDatas,shopCarView);
 
 
 
         }
         else
             {
-            ArrayList<ShopCarData> shopCarnull =new ArrayList<>();
-            shopCarRecycleViewAdapter=new ShopCarRecycleViewAdapter(mainActivity,shopCarnull,shopCarView);
+             shopCarDatas=new ArrayList<>();
+             shopCarRecycleViewAdapter=new ShopCarRecycleViewAdapter(mainActivity,shopCarDatas,shopCarView);
         }
 
 
@@ -155,25 +166,32 @@ public class ShopCarView extends  BasePagerView {
         tvShopCartSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSelect = !mSelect;
-                if(mSelect){
-                    Drawable left = mainActivity.getResources().getDrawable(R.drawable.shopcart_selected);
-                    tvShopCartSelect.setCompoundDrawablesWithIntrinsicBounds(left,null,null,null);
-                    for(int i = 0;i < shopCarDatas.size();i++){
-                        shopCarDatas.get(i).setSelect(true);
-                        shopCarDatas.get(i).setShopSelect(true);
-                    }
-                }else{
-                    Drawable left = mainActivity.getResources().getDrawable(R.drawable.shopcart_unselected);
-                    tvShopCartSelect.setCompoundDrawablesWithIntrinsicBounds(left,null,null,null);
-                    for(int i = 0;i < shopCarDatas.size();i++){
-                        shopCarDatas.get(i).setSelect(false);
-                        shopCarDatas.get(i).setShopSelect(false);
-                    }
-                }
-                shopCarRecycleViewAdapter.notifyDataSetChanged();
+                if(user!=null){
 
+                    mSelect = !mSelect;
+                    if(mSelect){
+                        Drawable left = mainActivity.getResources().getDrawable(R.drawable.shopcart_selected);
+                        tvShopCartSelect.setCompoundDrawablesWithIntrinsicBounds(left,null,null,null);
+                        for(int i = 0;i < shopCarDatas.size();i++){
+                            shopCarDatas.get(i).setSelect(true);
+                            shopCarDatas.get(i).setShopSelect(true);
+                        }
+                    }else{
+                        Drawable left = mainActivity.getResources().getDrawable(R.drawable.shopcart_unselected);
+                        tvShopCartSelect.setCompoundDrawablesWithIntrinsicBounds(left,null,null,null);
+                        for(int i = 0;i < shopCarDatas.size();i++){
+                            shopCarDatas.get(i).setSelect(false);
+                            shopCarDatas.get(i).setShopSelect(false);
+                        }
+                    }
+                    shopCarRecycleViewAdapter.notifyDataSetChanged();
+
+
+                }
             }
+
+
+
         });
         //更改数量
         shopCarRecycleViewAdapter.setOnEditClickListenter(new ShopCarRecycleViewAdapter.OnEditClickListenter() {
@@ -187,14 +205,28 @@ public class ShopCarView extends  BasePagerView {
         shopCarRecycleViewAdapter.setOnDeleteClickListener(new ShopCarRecycleViewAdapter.OnDeleteClickListener() {
             @Override
             public void onDeleteClick(View view, int position, String productname) {
+
                 userDb.deletePdinShopcar(user.getAccount(),productname);
+                //删除数据后重新计算最下面两栏的数据
+
                 Log.d("删除回调","执行");
+                //这里因为比上一个慢半拍所以等于1 其实已经是没有数据了
+                if(shopCarDatas.size()==1){
+                    tv_shopcart_totalprice.setText("总价：" + 0);
+                    tvShopCartTotalNum.setText("共" +0 + "件商品");
+                }
+                else {
+                }
+
+
             }
         });
         //
         shopCarRecycleViewAdapter.setResfreshListener(new ShopCarRecycleViewAdapter.OnResfreshListener() {
             @Override
-            public void onResfresh(boolean isSelect) {
+            public void onResfresh(boolean isSelect,int positon) {
+                Log.d("onResfresh","!!resfresh");
+                //处理点击后图标变化的
                 mSelect = isSelect;
                 if (mSelect) {
                     Drawable left = mainActivity.getResources().getDrawable(R.drawable.shopcart_selected);
@@ -204,19 +236,28 @@ public class ShopCarView extends  BasePagerView {
                     Drawable left = mainActivity.getResources().getDrawable(R.drawable.shopcart_unselected);
                     tvShopCartSelect.setCompoundDrawablesWithIntrinsicBounds(left, null, null, null);
                 }
-                //遍历集合 给后面的赋值
-                int mTotalNum = 0;
-                 int mTotalPrice=0;
-                for(int i = 0; i < shopCarDatas.size(); i++)
-                    if(shopCarDatas.get(i).isSelect()) {
-                       float  oneprice = Integer.parseInt(shopCarDatas.get(i).getPrice());
-                       float  number= Integer.parseInt(shopCarDatas.get(i).getNumber());
-                        mTotalPrice += oneprice * number;
-                        mTotalNum += 1;
-                    }
-               // mTotalPrice1 = mTotalPrice;
-                tv_shopcart_totalprice.setText("总价：" + mTotalPrice);
-                tvShopCartTotalNum.setText("共" + mTotalNum + "件商品");
+
+
+                if (positon==shopCarDatas.size()-1){
+                    //遍历集合 给后面的赋值 而赋值操作只有最后一项绘制完成后才需要。
+                    int mTotalNum = 0;
+                    int mTotalPrice=0;
+                    for(int i = 0; i < shopCarDatas.size(); i++)
+                        if(shopCarDatas.get(i).isSelect()) {
+                            float  oneprice = Integer.parseInt(shopCarDatas.get(i).getPrice());
+                            float  number= Integer.parseInt(shopCarDatas.get(i).getNumber());
+                            mTotalPrice += oneprice * number;
+                            mTotalNum += 1;
+                        }
+
+                    tv_shopcart_totalprice.setText("总价：" + mTotalPrice);
+                    tvShopCartTotalNum.setText("共" + mTotalNum + "件商品");
+                    Log.d("第"+positon+"项","（最后一项）改变Text");
+                }
+                else {
+                    Log.d("第"+positon+"项","正在判断select");
+                }
+
 
 
             }
@@ -234,6 +275,7 @@ public class ShopCarView extends  BasePagerView {
                         }
 
                     startsureOrderActivity.putExtra("dataBean",selectShopCardata);
+                    startsureOrderActivity.putExtra("flag","shopcar");
                     mainActivity.startActivity(startsureOrderActivity);
 
 

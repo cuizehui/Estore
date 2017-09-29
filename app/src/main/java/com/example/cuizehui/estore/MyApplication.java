@@ -43,6 +43,7 @@ public class MyApplication extends Application
 
     public void setUser(User user) {
         this.user = user;
+        Log.d("setuser","!!");
 
     }
 

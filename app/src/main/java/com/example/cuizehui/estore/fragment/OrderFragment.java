@@ -11,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.cuizehui.estore.MyApplication;
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.activity.OrderActivity;
 import com.example.cuizehui.estore.adapter.OrderAllAdapter;
 import com.example.cuizehui.estore.entity.OrderMessage;
 import com.example.cuizehui.estore.entity.ShopAdress;
+import com.example.cuizehui.estore.entity.User;
 
 import org.litepal.crud.DataSupport;
 
@@ -31,6 +33,7 @@ public class OrderFragment extends BaseFragment {
 
     OrderActivity orderActivity;
     private OrderAllAdapter orderAllAdapter;
+    private User user;
 
     public OrderFragment() {
         // Required empty public constructor
@@ -67,7 +70,9 @@ public class OrderFragment extends BaseFragment {
 
 
     private void initData() {
-        List<OrderMessage> orderMessageList=DataSupport.findAll(OrderMessage.class);
+
+        user= MyApplication.getInstance(orderActivity).getUser();
+        List<OrderMessage> orderMessageList=DataSupport.where("username = ? ",user.getAccount()).find(OrderMessage.class);
 
         //头数据预处理增加标记（原型模式）
 

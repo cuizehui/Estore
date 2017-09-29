@@ -62,9 +62,10 @@ public  abstract class BaseActivity extends AppCompatActivity {
 
             User user = MyApplication.getInstance(this).getUser();
             if (user != null) {
+               Log.d("user不为空","！");
                 super.startActivity(intent);
             } else {
-
+                Log.d("user为空","！");
                 MyApplication.getInstance(this).putIntent(intent);
                 Intent loginIntent = new Intent(this, LoginActivity.class);
                 super.startActivity(loginIntent);

@@ -110,8 +110,8 @@ public class CreateAdressActivity extends BaseActivity {
             shopAdress.setSdname(sr);
             shopAdress.setTelephone(mobile);
             shopAdress.setDicAdress(adress);
-
-            List<ShopAdress> shopAdresses= DataSupport.where("isfirstAdress = ?","true").find(ShopAdress.class);
+            shopAdress.setUsername(user.getAccount());
+            List<ShopAdress> shopAdresses= DataSupport.where("isfirstAdress = ? and username= ? ","true",user.getAccount()).find(ShopAdress.class);
 
             /*if(shopAdresses.size()==0){
             //第一次登录没有 设置过
@@ -137,4 +137,12 @@ public class CreateAdressActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Log.d("result","5");
+        setResult(5);
+
+        super.onBackPressed();
+          finish();
+    }
 }

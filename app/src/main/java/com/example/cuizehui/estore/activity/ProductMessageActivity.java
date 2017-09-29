@@ -69,7 +69,7 @@ public class ProductMessageActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        //获取购物清单数量
+        //获取购物清单 总数量 而不是种类数量！
         UserDb userDb=MyApplication.getInstance(ProductMessageActivity.this).getUserDatedb();
         Cursor cursor=userDb.selectShopCarMessage(user.getAccount());
         int number= cursor.getCount();
@@ -167,7 +167,9 @@ public class ProductMessageActivity extends BaseActivity {
                 shopCarDatas.add(shopCarData);
 
                 intentbuy.putExtra("dataBean",shopCarDatas);
+                intentbuy.putExtra("flag","buy");
                 startActivity(intentbuy);
+
             }
         });
 
