@@ -16,17 +16,8 @@
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="45360051d11673a82de915f0b2e7a99d216d870e">
+        sha1="83561078adf386fa96ec85f0757646519e208d5e">
         <dex dex="/home/cuizehui/AndroidStudioProjects/Estore/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_76e1cca1a511d74f4809f60880ae03b805b580cc/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/cuizehui/.android/build-cache/a16076a9037170890f8890c5ab086c4e417c1a04/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="4744089ba76f30cbe4ee3aaa85f2b10003a11993">
-        <dex dex="/home/cuizehui/AndroidStudioProjects/Estore/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0e24a8f6cdcaf24ddc402f4e6b39b117ff398b03/classes.dex" />
     </item>
 
 </items>

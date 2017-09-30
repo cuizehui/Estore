@@ -111,10 +111,25 @@ public class AdressMenagerActivity extends BaseActivity {
         adressMenagerRecyleviewAdapter.setonFirstAdressOnclickLisner(new AdressMenagerRecyleviewAdapter.onFirstAdressLisner() {
             @Override
             public void setFirstAdress(int position) {
-                 ShopAdress shopAdress=shopAdresses.get(position);
-                //同步到数据库
+
+                //第一次没有值！！
+
+                if(shopAdresses.size()>0){
+                    //把当前的设置为第一地址 并把之前的设置为null
+                    ShopAdress shopAdressesupdate=new ShopAdress();
+                    shopAdressesupdate.setIsfirstAdress("false");
+                    shopAdressesupdate.updateAll("username = ? and isfirstAdress = ?",user.getAccount().toString(),"true");
+
+                }
+                else {
+                    Log.d("Aressma size:", shopAdresses.size()+"");
+                }
+
+                ShopAdress shopAdress=shopAdresses.get(position);
                 shopAdress.setIsfirstAdress("true");
                 shopAdress.save();
+                setResult(6);
+                 //并通知 确认订单地址 默认地址发生变化
                 Toast.makeText(AdressMenagerActivity.this,"设置"+shopAdress.getDicAdress()+"为默认地址",Toast.LENGTH_LONG).show();
             }
         });
@@ -124,14 +139,7 @@ public class AdressMenagerActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(requestCode==3&&resultCode==3){
-          /*  Log.d("adressmenager 回调","！！");
-
-            shopAdresses= DataSupport.findAll(ShopAdress.class);
-            Log.d("回调后 sieze :", shopAdresses.size()+"");
-
-            //无效的原因可能时因为生命周期回调时，产生的是两个不同的对象
-            adressMenagerRecyleviewAdapter.notifyDataSetChanged();*/
-                refrush();
+              refrush();
         }
 
     }
@@ -141,4 +149,6 @@ public class AdressMenagerActivity extends BaseActivity {
         initEvent();
 
     }
+
+
 }

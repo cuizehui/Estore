@@ -13,12 +13,22 @@ public class OrderMessage  extends DataSupport{
 
    private  String  pdname;
 
+    private String  shopname;
+
     private String  pdnumber;
 
     private String  ordertime;
     //订单状态
     private String  orderstatus;
     private String  orderprice;
+
+    public String getShopname() {
+        return shopname;
+    }
+
+    public void setShopname(String shopname) {
+        this.shopname = shopname;
+    }
 
     public String getOrderid() {
         return orderid;

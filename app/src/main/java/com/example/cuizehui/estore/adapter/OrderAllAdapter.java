@@ -14,6 +14,7 @@ import com.example.cuizehui.estore.fragment.OrderFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindBitmap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -35,12 +36,8 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
-       /* if(viewType == ITEM_HEADER) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_allorder_header, parent, false);
-        }else if(viewType == ITEM_CONTENT){
-         }else if(viewType == ITEM_FOOTER){
-            view = LayoutInflater.from(context).inflate(R.layout.item_allorder_footer, parent, false);
-       }*/
+
+
         view = LayoutInflater.from(context).inflate(R.layout.item_allorder_content, parent, false);
 
         Holder holder=new Holder(view);
@@ -51,6 +48,11 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
     public void onBindViewHolder(Holder holder, int position) {
 
         holder.orderitem_pctv.setText(orderMessages.get(position).getPdname());
+        holder.order_price.setText(orderMessages.get(position).getOrderprice()+"元");
+        holder.order_state.setText(orderMessages.get(position).getOrderstatus());
+        holder.order_number.setText("共"+orderMessages.get(position).getPdnumber()+"件");
+        holder.order_id.setText(orderMessages.get(position).getOrderid());
+        holder.order_shopname.setText(orderMessages.get(position).getShopname());
     }
 
     @Override
@@ -63,6 +65,17 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
        @BindView(R.id.tv_orderitem_productname)
        public TextView orderitem_pctv;
 
+        @BindView(R.id.tv_item_allorder_item_price)
+        TextView  order_price;
+        @BindView(R.id.tv_item_allorder_state)
+        TextView order_state;
+
+        @BindView(R.id.order_all_numbertv)
+        TextView order_number;
+        @BindView(R.id.tv_item_allorder_orderid)
+        TextView order_id;
+        @BindView(R.id.tv_item_allorder_shopname)
+        TextView order_shopname;
         public Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

@@ -173,7 +173,7 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(SureOrderActivity.this,AdressMenagerActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,6);
             }
         });
     }
@@ -190,6 +190,11 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
 
         if(requestCode==4&&resultCode==5){
              finish();
+        }
+        if (requestCode==6&&resultCode==6){
+            initData();
+            initView();
+            initEvent();
         }
 
     }
@@ -229,10 +234,11 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
             OrderMessage orderMessage=new OrderMessage();
             orderMessage.setUsername(user.getAccount());
             orderMessage.setOrderprice(shopCarData.getPrice());
-
+            orderMessage.setShopname(shopCarData.getShopname());
             orderMessage.setPdname(shopCarData.getProducename());
             orderMessage.setPdnumber(shopCarData.getNumber());
             Date    curDate    =   new Date(System.currentTimeMillis());
+            Log.d("curdate",curDate+"");
             orderMessage.setOrderid(curDate.toString());
             if(uri.equals("true")){
                 orderMessage.setOrderstatus("payed");
