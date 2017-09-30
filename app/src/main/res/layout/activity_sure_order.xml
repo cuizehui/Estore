@@ -72,7 +72,6 @@
     >
     <View
         android:background="@drawable/adressbackgroud"
-        android:id="@+id/emtryview1"
         android:layout_width="match_parent"
         android:layout_height="5dp">
     </View>
@@ -93,7 +92,6 @@
     android:orientation="horizontal"
     android:background="@color/main_white_text"
     android:gravity="center_vertical"
-    android:id="@+id/ll_pay"
     android:layout_above="@+id/emtryview2"
     >
 

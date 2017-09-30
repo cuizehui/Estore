@@ -1,8 +1,11 @@
 package com.example.cuizehui.estore.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,9 +17,9 @@ import com.example.cuizehui.estore.R;
 
 public class BottomBarView extends RelativeLayout {
 
-
-
-        private Context context;
+    Drawable drawable;
+    private final ImageView icon;
+    private Context context;
         private TextView bar_num;
         private int count = 0;
 
@@ -35,6 +38,18 @@ public class BottomBarView extends RelativeLayout {
             super(context, attrs, defStyleAttr);
             this.context = context;
             RelativeLayout rl = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.bottom_bar_view, this, true);
+
+
+            TypedArray ta= context.obtainStyledAttributes(attrs,R.styleable.BottomBarView);//通过这种方式获取属性的值。不用命名空间了！
+            Drawable d = ta.getDrawable(R.styleable.BottomBarView_iconpic);
+            if (d != null) {
+                drawable=d;
+            } else {
+                throw new RuntimeException("图像资源为空");
+            }
+
+            icon=(ImageView)rl.findViewById(R.id.imggwc);
+            icon.setImageDrawable(drawable);
             bar_num = (TextView) rl.findViewById(R.id.bar_num);
             bar_num.setVisibility(GONE);
         }

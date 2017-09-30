@@ -251,6 +251,7 @@ public class MainActivity extends BaseActivity {
     public void refrushMineView(){
         //更新我的
         MinePagerView minePagerView= (MinePagerView) mainViewPagerAdapter.getPagerViewArrayList().get(3);
+        minePagerView.initDate();
         minePagerView.initView();
 
         minePagerView.initEvent();
@@ -285,12 +286,14 @@ public class MainActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public  void onEvent(StringFlag stringFlag){
+
         if(stringFlag.getFlag().equals("jumpshopcar")){
             refrushShopCarView();
             switchViewpager(2);
         }
-        else {
-
+        if(stringFlag.getFlag().equals("logout")){
+            refrushShopCarView();
+            refrushMineView();
         }
     }
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.cuizehui.estore.widget.GradationScrollView
-    android:id="@+id/scrollview"
-    android:layout_width="match_parent"
+<com.example.cuizehui.estore.widget.GradationScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -12,7 +10,6 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/iv_good_detai_img"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:scaleType="fitXY"
@@ -20,7 +17,6 @@
             android:visibility="visible" />
 
         <LinearLayout
-            android:id="@+id/ll_offset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -114,7 +110,6 @@
             android:background="@color/grey_line_bg" />
 
         <LinearLayout
-            android:id="@+id/ll_good_detail_service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -187,7 +182,6 @@
         <include layout="@layout/layout_line" />
 
         <RelativeLayout
-            android:id="@+id/rl_good_detail_jin"
             android:padding="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_tinyer"
             android:layout_width="match_parent"
@@ -218,7 +212,6 @@
 
         <TextView
             android:background="@drawable/list_gray_item"
-            android:id="@+id/tv_good_detail_cate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/rightarrow"
@@ -323,7 +316,6 @@
                 android:paddingRight="@dimen/spacing_smallest"
                 android:paddingLeft="@dimen/spacing_smallest"
                 android:background="@drawable/bg_border_color_primary"
-                android:id="@+id/tv_talent_detail_open"
                 style="@style/colorPrimaryTextStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

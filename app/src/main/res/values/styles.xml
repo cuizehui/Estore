@@ -43,19 +43,6 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="search_view">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textColorHint">@color/white</item>
-
-        <item name="android:background">@drawable/selector_search_view</item>
-        <item name="android:paddingTop">6dp</item>
-        <item name="android:paddingBottom">6dp</item>
-        <item name="android:paddingLeft">4dp</item>
-
-        <item name="android:singleLine">true</item>
-    </style>
-
 
     <style name="line">
         <item name="android:background">@color/divider_color</item>
@@ -85,33 +72,6 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">@dimen/normalButtonHeight</item>
-    </style>
-
-
-    <style name="smallButton">
-        <item name="android:textSize">@dimen/smallButtonTextSize</item>
-        <item name="android:textColor">@color/white_color_selector</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingLeft">@dimen/smallPadding</item>
-        <item name="android:paddingRight">@dimen/smallPadding</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minWidth">@dimen/smallButtonWidth</item>
-        <item name="android:minHeight">@dimen/smallButtonHeight</item>
-    </style>
-
-
-    <style name="smallGreenButton" parent="@style/smallButton">
-        <item name="android:background">@drawable/bg_btn_style_green</item>
-    </style>
-
-    <style name="smallGreyButton" parent="@style/smallButton">
-        <item name="android:textColor">@color/grey_btn_text_color</item>
-        <item name="android:background">@drawable/bg_btn_style_grey</item>
-    </style>
-
-    <style name="smallRedButton" parent="@style/smallButton">
-        <item name="android:background">@drawable/bg_btn_style_red</item>
     </style>
 
 
@@ -161,24 +121,7 @@
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/darkgray</item>
     </style>
-    <style name="customMineTextGray" >
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/darkgray</item>
-    </style>
 
-
-    <style name="ware_title">
-
-        <item name="android:textColor">@color/gray</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:maxLines">3</item>
-    </style>
-
-    <style name="ware_price">
-        <item name="android:textColor">@color/crimson</item>
-        <item name="android:textSize">22sp</item>
-
-    </style>
 
     <style name="editText_base">
         <item name="android:textSize">16sp</item>
@@ -193,12 +136,6 @@
     <style name="editText" parent="editText_base">
 
         <item name="android:background">@drawable/selector_edittext</item>
-
-    </style>
-
-    <style name="radioButton">
-        <item name="android:background">@drawable/selector_checkbox_green</item>
-        <item name="android:button">@null</item>
 
     </style>
 
@@ -237,10 +174,7 @@
         <item name="android:textSize">@dimen/font_normal</item>
         <item name="android:textColor">@color/black</item>
     </style>
-   <style name="whiteTextStyleTitle">
-        <item name="android:textSize">@dimen/font_large</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
+
     <style name="blackTextStyleSmall">
         <item name="android:textSize">@dimen/font_small</item>
         <item name="android:textColor">@color/black</item>

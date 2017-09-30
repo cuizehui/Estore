@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="BottomBarView">  //自定义控件的名字
+        <attr name="iconpic" format="reference"/>   //引用类型的值 例如ID
+    </declare-styleable>
+
+</resources>

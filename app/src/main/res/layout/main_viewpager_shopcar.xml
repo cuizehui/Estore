@@ -47,7 +47,6 @@
         android:orientation="horizontal"
         android:background="@color/main_white_text"
         android:gravity="center_vertical"
-        android:id="@+id/ll_pay"
         android:layout_above="@+id/emtryview"
         >
 

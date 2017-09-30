@@ -17,7 +17,6 @@
     <!--android:src="@mipmap/back"/>-->
 
     <TextView
-        android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,7 +27,6 @@
         android:textSize="@dimen/title_size" />
 
     <ImageView
-        android:id="@+id/toolbar_left_logo"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_gravity="center"
@@ -36,14 +34,12 @@
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/toolbar_logo"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_gravity="center"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/toolbar_left_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
@@ -66,7 +62,6 @@
             android:textSize="14sp" />
 
         <ImageView
-            android:id="@+id/image_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -74,7 +69,6 @@
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/image_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

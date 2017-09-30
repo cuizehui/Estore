@@ -206,8 +206,10 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
     @Override
     public void onFragmentInteraction(String uri) {
             Log.d("支付完成后回调","！！"+uri);
-
-       if(flagwhere.equals("buy")){
+        RefrushMain refrushMain=new RefrushMain();
+        makeOrder(uri);
+        if(flagwhere.equals("buy")){
+           EventBus.getDefault().post(refrushMain);
         }
         else
             {
@@ -215,10 +217,8 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
             for(int i=0;i<shopCarDatas.size();i++){
                 userDb.deletePdinShopcar(user.getAccount(),shopCarDatas.get(i).getProducename());
             }
-             RefrushMain refrushMain=new RefrushMain();
-            EventBus.getDefault().post(refrushMain);
+               EventBus.getDefault().post(refrushMain);
         }
-        makeOrder(uri);
          finish();
     }
 

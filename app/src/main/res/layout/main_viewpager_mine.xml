@@ -6,9 +6,7 @@
 
     >
 
-    <include
-        android:id="@+id/minett"
-        layout="@layout/mine_tt" />
+    <include layout="@layout/mine_tt" />
 
      <include android:id="@+id/mineorder"
          layout="@layout/mine_order"/>

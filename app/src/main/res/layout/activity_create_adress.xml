@@ -86,7 +86,6 @@
             />
         <EditText
             android:layout_weight="1"
-            android:id="@+id/et_youbian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffffff"
@@ -124,7 +123,6 @@
             <TextView
                 android:layout_weight="1"
                 android:clickable="true"
-                android:id="@+id/tv_city1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"

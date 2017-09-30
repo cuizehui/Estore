@@ -1,58 +1,29 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="buttonCornerSize">2.0dip</dimen>
-    <dimen name="dialog_round_radius">4.0dip</dimen>
-    <dimen name="smallButtonHeight">32.0dip</dimen>
-    <dimen name="smallButtonWidth">48.0dip</dimen>
     <dimen name="normalButtonHeight">48.0dip</dimen>
-    <dimen name="normalButtonWidth">80.0dip</dimen>
 
-    <dimen name="basicPaddingSize">4.0dip</dimen>
-    <dimen name="inputEditTextMinHeight">32.0dip</dimen>
-    <dimen name="searchViewMinHeight">45dip</dimen>
     <dimen name="smallPadding">8.0dip</dimen>
     <dimen name="largePadding">16.0dip</dimen>
     <dimen name="largerPadding">24.0dip</dimen>
     <dimen name="largestPadding">32.0dip</dimen>
     <dimen name="smallerPadding">3.0dip</dimen>
-    <dimen name="littlePadding">6.0dip</dimen>
     <dimen name="middlePadding">10.0dip</dimen>
-    <dimen name="normalPadding">12.0dip</dimen>
-    <dimen name="footerPadding">11.0dip</dimen>
-    <dimen name="noPadding">0.0dip</dimen>
 
     <dimen name="bigButtonTextSize">18.0dip</dimen>
-    <dimen name="normalButtonTextSize">16.0dip</dimen>
-    <dimen name="smallButtonTextSize">14.0dip</dimen>
 
 
-    <dimen name="ware_grid_img_width">60dp</dimen>
-    <dimen name="ware_grid_img_height">60dp</dimen>
-    <dimen name="ware_img_height">150dp</dimen>
-    <dimen name="ware_img_width">150dp</dimen>
-    <dimen name="small_ware_img_width">100dp</dimen>
-    <dimen name="category_layout_width">120dp</dimen>
     <dimen name="title_size">20sp</dimen>
-    <dimen name="text_margin">16dp</dimen>
-    <dimen name="space_size">4dp</dimen>
     <dimen name="text_size_12sp">12sp</dimen>
 
 
-    <dimen name="font_larger">22sp</dimen>
-    <dimen name="font_large">18sp</dimen>
     <dimen name="font_normal">15sp</dimen>
     <dimen name="font_smaller">14sp</dimen>
     <dimen name="font_small">12sp</dimen>
 
     <!-- typical spacing between two views -->
-    <dimen name="spacing_huge">40dp</dimen>
-    <dimen name="spacing_larger">34dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
-    <dimen name="spacing_biger">20dp</dimen>
-    <dimen name="spacing_big">18dp</dimen>
     <dimen name="spacing_normal">14dp</dimen>
     <dimen name="spacing_small">12dp</dimen>
     <dimen name="spacing_smaller">10dp</dimen>
@@ -62,75 +33,25 @@
     <dimen name="spacing_tinyest">2dp</dimen>
 
 
-    <dimen name="common_button_size">15sp</dimen>
-    <dimen name="common_title_size">18sp</dimen>
-    <dimen name="common_font_size">14sp</dimen>
-    <dimen name="common_smail_font_size">12sp</dimen>
-
     <dimen name="common_font_size_16">16sp</dimen>
     <dimen name="common_font_size_14">14sp</dimen>
     <dimen name="common_font_size_12">12sp</dimen>
-    <dimen name="car_radio_margin">10dp</dimen>
-    <dimen name="car_style_margin_top">5dp</dimen>
-    <dimen name="car_drawable_left_margin">2dp</dimen>
-    <dimen name="coupons_margin_left">10dp</dimen>
-    <dimen name="coupons_margin_top">2dp</dimen>
-    <dimen name="margin_10">10dp</dimen>
 
-
-    <dimen name="padding_left">14dp</dimen>
-    <dimen name="padding_right">14dp</dimen>
-    <dimen name="margin_left">14dp</dimen>
-    <dimen name="margin_right">14dp</dimen>
 
     <!--外边距-->
     <dimen name="margin_1dp">1dp</dimen>
-    <dimen name="margin_2dp">2dp</dimen>
-    <dimen name="margin_3dp">3dp</dimen>
-    <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_5dp">5dp</dimen>
-    <dimen name="margin_6dp">6dp</dimen>
-    <dimen name="margin_7dp">7dp</dimen>
-    <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
-    <dimen name="margin_11dp">10dp</dimen>
-    <dimen name="margin_12dp">10dp</dimen>
     <dimen name="margin_15dp">15dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
-    <dimen name="margin_25dp">25dp</dimen>
     <dimen name="margin_30dp">30dp</dimen>
-    <dimen name="margin_50dp">50dp</dimen>
     <!--内边距-->
     <dimen name="padding_2dp">2dp</dimen>
-    <dimen name="padding_3dp">3dp</dimen>
-    <dimen name="padding_4dp">4dp</dimen>
     <dimen name="padding_5dp">5dp</dimen>
-    <dimen name="padding_6dp">6dp</dimen>
-    <dimen name="padding_7dp">7dp</dimen>
-    <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_10dp">10dp</dimen>
-    <dimen name="padding_12dp">12dp</dimen>
-    <dimen name="padding_13dp">13dp</dimen>
-    <dimen name="padding_14dp">14dp</dimen>
-    <dimen name="padding_15dp">15dp</dimen>
     <dimen name="padding_20dp">20dp</dimen>
     <!--字体大小-->
-    <dimen name="textSize_10sp">10sp</dimen>
-    <dimen name="textSize_12sp">12sp</dimen>
-    <dimen name="textSize_13sp">13sp</dimen>
-    <dimen name="textSize_14sp">14sp</dimen>
-    <dimen name="textSize_15sp">15sp</dimen>
-    <dimen name="textSize_16sp">16sp</dimen>
-    <dimen name="textSize_18sp">18sp</dimen>
-    <dimen name="textSize_20sp">20sp</dimen>
-    <dimen name="textSize_22sp">22sp</dimen>
-    <dimen name="textSize_30sp">30sp</dimen>
 
     <!--城市-->
-    <dimen name="side_letter_bar_letter_size">12sp</dimen>
-    <dimen name="city_text_size">16sp</dimen>
-    <dimen name="side_letter_bar_width">36dp</dimen>
-    <dimen name="width_200dp">200dp</dimen>
     <dimen name="height_200dp">200dp</dimen>
-    <dimen name="margin_size5dp">5dp</dimen>
 </resources>

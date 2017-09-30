@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myBBview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,74 +8,135 @@
     android:orientation="horizontal"
     tools:showIn="@layout/fragment_mine">
 
-    <TextView
-        android:id="@+id/mine_fun_all_order"
-        style="@style/customMineTextBlackGray"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/middlePadding"
-        android:layout_marginTop="@dimen/middlePadding"
-        android:layout_weight="1"
-        android:drawablePadding="@dimen/smallerPadding"
-        android:drawableTop="@drawable/ic_m_allorder"
-        android:gravity="center_horizontal"
-        android:text="全部订单"
-        android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/mine_fun_wait_pay"
-        style="@style/customMineTextBlackGray"
+    <LinearLayout
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/middlePadding"
-        android:layout_marginTop="@dimen/middlePadding"
-        android:layout_weight="1"
-        android:drawablePadding="@dimen/smallerPadding"
-        android:drawableTop="@drawable/ic_m_waitpay"
-        android:gravity="center_horizontal"
-        android:text="待付款"
-        android:textColor="@color/black" />
+        android:layout_marginTop="5dip"
+        android:orientation="vertical"
 
-    <TextView
-        android:id="@+id/mine_fun_wait_receive"
-        style="@style/customMineTextBlackGray"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/middlePadding"
-        android:layout_marginTop="@dimen/middlePadding"
-        android:layout_weight="1"
-        android:drawablePadding="@dimen/smallerPadding"
-        android:drawableTop="@drawable/ic_m_shouhuo"
-        android:gravity="center_horizontal"
-        android:text="待收货"
-        android:textColor="@color/black" />
+        >
+        <com.example.cuizehui.estore.widget.BottomBarView
+            android:id="@+id/all_order_bottombar"
+            myBBview:iconpic="@drawable/ic_m_shouhuo"
 
-    <TextView
-        android:id="@+id/mine_fun_payback"
-        style="@style/customMineTextBlackGray"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/middlePadding"
-        android:layout_marginTop="@dimen/middlePadding"
-        android:layout_weight="1"
-        android:drawablePadding="@dimen/smallerPadding"
-        android:drawableTop="@drawable/ic_m_tk"
-        android:gravity="center_horizontal"
-        android:text="退款订单"
-        android:textColor="@color/black" />
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/mine_fun_evaluate"
-        style="@style/customMineTextBlackGray"
+        </com.example.cuizehui.estore.widget.BottomBarView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/customMineTextBlackGray"
+            android:layout_marginTop="-2dip"
+            android:text="全部订单"
+            android:layout_gravity="center_horizontal"
+
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/middlePadding"
-        android:layout_marginTop="@dimen/middlePadding"
+        android:layout_marginTop="5dip"
+        android:orientation="vertical"
+
+        >
+        <com.example.cuizehui.estore.widget.BottomBarView
+            myBBview:iconpic="@drawable/ic_m_tk"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.example.cuizehui.estore.widget.BottomBarView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/customMineTextBlackGray"
+            android:layout_marginTop="-2dip"
+            android:text="待付款"
+            android:layout_gravity="center_horizontal"
+
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_weight="1"
-        android:drawablePadding="@dimen/smallerPadding"
-        android:drawableTop="@drawable/ic_m_evaluate"
-        android:gravity="center_horizontal"
-        android:text="订单评价"
-        android:textColor="@color/black" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/middlePadding"
+        android:layout_marginTop="5dip"
+        android:orientation="vertical"
+
+        >
+        <com.example.cuizehui.estore.widget.BottomBarView
+            myBBview:iconpic="@drawable/ic_m_waitpay"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.example.cuizehui.estore.widget.BottomBarView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/customMineTextBlackGray"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="-2dip"
+            android:text="待收货"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/middlePadding"
+        android:layout_marginTop="5dip"
+        android:orientation="vertical"
+
+        >
+        <com.example.cuizehui.estore.widget.BottomBarView
+            myBBview:iconpic="@drawable/ic_m_evaluate"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.example.cuizehui.estore.widget.BottomBarView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            style="@style/customMineTextBlackGray"
+            android:layout_marginTop="-2dip"
+            android:text="退款订单"
+            android:layout_gravity="center_horizontal"
+
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

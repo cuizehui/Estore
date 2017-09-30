@@ -15,11 +15,17 @@ import com.example.cuizehui.estore.activity.LoginActivity;
 import com.example.cuizehui.estore.activity.OrderActivity;
 import com.example.cuizehui.estore.activity.PersonalInfoActivity;
 import com.example.cuizehui.estore.activity.SettingActivity;
+import com.example.cuizehui.estore.entity.OrderMessage;
 import com.example.cuizehui.estore.entity.StringFlag;
 import com.example.cuizehui.estore.entity.User;
+import com.example.cuizehui.estore.widget.BottomBarView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,6 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MinePagerView extends BasePagerView {
 
     private LinearLayout mineorderll;
+    private BottomBarView allorderbt;
 
     public MinePagerView(MainActivity mainActivity) {
         super(mainActivity);
@@ -39,7 +46,7 @@ public class MinePagerView extends BasePagerView {
     CircleImageView imgHead;
     public    ImageView setting;
 
-
+    List<OrderMessage> allorderMessageList;
 
     User user;
 
@@ -61,6 +68,18 @@ public class MinePagerView extends BasePagerView {
         setting =mineview.findViewById(R.id.mine_logoutiv);
 
         mineorderll=mineview.findViewById(R.id.mineorder);
+        allorderbt= mineview.findViewById(R.id.all_order_bottombar);
+
+        try {
+            if(allorderMessageList.size()==0){}
+            else {
+                allorderbt.add(allorderMessageList.size());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         basePager_fl.addView(mineview);
         Log.d("initview","-!-");
@@ -79,8 +98,18 @@ public class MinePagerView extends BasePagerView {
     }
 
     @Override
-    protected void initDate() {
+     public void initDate() {
         super.initDate();
+        //获取全部订单个数
+        if(user!=null){
+            user= MyApplication.getInstance(mainActivity).getUser();
+          allorderMessageList= DataSupport.where("username = ? ",user.getAccount()).find(OrderMessage.class);
+        }
+        else {
+            allorderMessageList=new ArrayList<>();
+        }
+
+
     }
 
     @Override
