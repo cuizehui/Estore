@@ -25,6 +25,8 @@ public class UserDbHelper extends SQLiteOpenHelper {
             "number string," +
             //商品价格
             "price string," +
+            //商品图片
+            "productpic Blob," +
             "storename string, primary key(userphone,productname))";
 
 

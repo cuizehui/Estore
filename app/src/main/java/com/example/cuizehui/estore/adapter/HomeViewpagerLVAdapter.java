@@ -1,6 +1,8 @@
 package com.example.cuizehui.estore.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.entity.ShopDaTa;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
@@ -25,8 +28,7 @@ public class HomeViewpagerLVAdapter extends BaseAdapter {
     public ArrayList<ShopDaTa> shopDATAsarrayList;
 
     Context context;
-
-    public ArrayList<ShopDaTa> getShopDATAsarrayList() {
+   public ArrayList<ShopDaTa> getShopDATAsarrayList() {
         return shopDATAsarrayList;
     }
 
@@ -76,7 +78,17 @@ public class HomeViewpagerLVAdapter extends BaseAdapter {
         }
 
         holder.textView.setText(shopDaTa.getProductName().toString());
+        byte[] bytes= shopDaTa.getBitmaps();
+        if(bytes!=null){
+            Log.d("bitmap_bytes size:",""+bytes.length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
+            holder.draweeView.setImageBitmap(bitmap);
+
+        }
+        else {
+
+        }
         return view;
 
     }
@@ -84,10 +96,14 @@ public class HomeViewpagerLVAdapter extends BaseAdapter {
     static class ViewHolder {
          @BindView(R.id.productName_tV)
          TextView textView;
+         @BindView(R.id.sdview)
+        SimpleDraweeView draweeView;
+
         public ViewHolder(View view) {
            ButterKnife.bind(this, view);
         }
     }
+
 
 
 }

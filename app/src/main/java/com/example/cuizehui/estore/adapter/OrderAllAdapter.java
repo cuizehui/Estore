@@ -1,20 +1,20 @@
 package com.example.cuizehui.estore.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.activity.OrderActivity;
 import com.example.cuizehui.estore.entity.OrderMessage;
-import com.example.cuizehui.estore.fragment.OrderFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindBitmap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -53,6 +53,16 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
         holder.order_number.setText("共"+orderMessages.get(position).getPdnumber()+"件");
         holder.order_id.setText(orderMessages.get(position).getOrderid());
         holder.order_shopname.setText(orderMessages.get(position).getShopname());
+        byte[] bytes=orderMessages.get(position).getOrderpic();
+
+        if(bytes!=null){
+            Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+            holder.order_iv.setImageBitmap(bitmap);
+
+        }else {
+
+        }
+
     }
 
     @Override
@@ -76,6 +86,8 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
         TextView order_id;
         @BindView(R.id.tv_item_allorder_shopname)
         TextView order_shopname;
+        @BindView(R.id.orderAll_pic)
+        ImageView order_iv;
         public Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

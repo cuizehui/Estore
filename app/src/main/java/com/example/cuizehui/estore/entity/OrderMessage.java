@@ -4,6 +4,7 @@ import org.litepal.crud.DataSupport;
 
 /**
  * Created by cuizehui on 17-9-25.
+ * 存入数据库的实体类
  */
 //订单对象
 
@@ -21,6 +22,16 @@ public class OrderMessage  extends DataSupport{
     //订单状态
     private String  orderstatus;
     private String  orderprice;
+
+    private byte[] orderpic;
+
+    public byte[] getOrderpic() {
+        return orderpic;
+    }
+
+    public void setOrderpic(byte[] orderpic) {
+        this.orderpic = orderpic;
+    }
 
     public String getShopname() {
         return shopname;

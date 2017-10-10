@@ -1,13 +1,10 @@
 package com.example.cuizehui.estore.activity;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -237,6 +234,9 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
             orderMessage.setShopname(shopCarData.getShopname());
             orderMessage.setPdname(shopCarData.getProducename());
             orderMessage.setPdnumber(shopCarData.getNumber());
+
+            orderMessage.setOrderpic(shopCarData.getBytes());
+
             Date    curDate    =   new Date(System.currentTimeMillis());
             Log.d("curdate",curDate+"");
             orderMessage.setOrderid(curDate.toString());

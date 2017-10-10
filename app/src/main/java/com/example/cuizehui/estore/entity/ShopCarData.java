@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by cuizehui on 17-9-21.
+ * 存入数据库的实体类 自定义数据库！！
  */
 
 public class ShopCarData  implements Serializable {
@@ -11,6 +12,16 @@ public class ShopCarData  implements Serializable {
     private String producename;
     private String number;
     private String price;
+
+    private byte[] bytes;
+
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
 
     public String getPrice() {
         return price;

@@ -1,15 +1,17 @@
 package com.example.cuizehui.estore.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.activity.SureOrderActivity;
 import com.example.cuizehui.estore.entity.ShopCarData;
-import com.example.cuizehui.estore.entity.ShopDaTa;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,17 @@ public class SureOrderRecycleViewAdapter extends  RecyclerView.Adapter<SureOrder
         holder.tVshop_price.setText(shopCarData.getPrice());
         holder.tvnum.setText(shopCarData.getNumber());
         holder.tVshopname.setText(shopCarData.getShopname());
+
+        //处理字节图片
+        byte[] bytes=shopCarData.getBytes();
+        if(bytes!=null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            holder.iv_pic.setImageBitmap(bitmap);
+        }
+        else {
+
+        }
+
     }
 
     @Override
@@ -60,6 +73,8 @@ public class SureOrderRecycleViewAdapter extends  RecyclerView.Adapter<SureOrder
         TextView tvnum;
         @BindView(R.id.order_product_name)
         TextView tvname;
+        @BindView(R.id.order_pic)
+        ImageView iv_pic;
         public Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

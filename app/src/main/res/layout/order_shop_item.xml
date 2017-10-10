@@ -87,6 +87,7 @@
                 >
 
                 <ImageView
+                    android:id="@+id/order_pic"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_margin="@dimen/margin_10dp"

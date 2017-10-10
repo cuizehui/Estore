@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by cuizehui on 17-9-19.
+ * 临时实体类 做周转
+ *
  */
 
 public class ShopDaTa  implements Serializable{
@@ -21,6 +23,27 @@ public class ShopDaTa  implements Serializable{
     String price;
     //快递价格
     String mailprice;
+
+    //图片字节数组
+    byte[] bitmaps ;
+
+    public byte[] getBitmaps() {
+        return bitmaps;
+    }
+
+    public void setBitmaps(byte[] bitmaps) {
+        this.bitmaps = bitmaps;
+    }
+
+    public byte[] getBitmapbig() {
+        return bitmapbig;
+    }
+
+    public void setBitmapbig(byte[] bitmapbig) {
+        this.bitmapbig = bitmapbig;
+    }
+
+    byte[] bitmapbig ;
 
 
     public String getShopName() {

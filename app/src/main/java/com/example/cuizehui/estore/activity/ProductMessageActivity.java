@@ -2,14 +2,14 @@ package com.example.cuizehui.estore.activity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.example.cuizehui.estore.MyApplication;
 import com.example.cuizehui.estore.R;
@@ -46,6 +46,8 @@ public class ProductMessageActivity extends BaseActivity {
     TextView price;
     @BindView(R.id.shopcar_icon)
     BottomBarView bottomBarView;
+    @BindView(R.id.product_mianpic)
+    ImageView product_iV;
 
     private ShopDaTa shopDaTa;
     private UserDb userDb;
@@ -79,6 +81,8 @@ public class ProductMessageActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
     @Override
@@ -86,10 +90,19 @@ public class ProductMessageActivity extends BaseActivity {
         super.initData();
         ButterKnife.bind(this);
         shopDaTa = (ShopDaTa) getIntent().getSerializableExtra("shopData");
-    //    Log.d("shopdata name",""+shopDaTa.getProductName());
 
         shopname_textView.setText(shopDaTa.getProductName());
         price.setText(shopDaTa.getPrice());
+
+
+        byte[] bytes=shopDaTa.getBitmaps();
+         if(bytes!=null){
+             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+             product_iV.setImageBitmap(bitmap);
+         }
+         else {
+
+         }
 
          userDb=MyApplication.getInstance(ProductMessageActivity.this).getUserDatedb();
          user= MyApplication.getInstance(ProductMessageActivity.this).getUser();
@@ -115,13 +128,14 @@ public class ProductMessageActivity extends BaseActivity {
                     String price=shopDaTa.getPrice();
                     String productname=shopDaTa.getProductName();
                     String shopname=shopDaTa.getShopName();
+                    byte[] bytes=shopDaTa.getBitmaps();
 
                     // 插入前可先进行查询 如果已经存在 则使用更新方式 如果不存在则使用插入
                      String  selectnumber=userDb.Productnumber(username,productname);
                 int   i=Integer.parseInt(selectnumber);
                      if(i==0){
                         Log.d("数据库插入","");
-                        userDb.insertShopCarTable(username,productname,shopname,number+"",price);
+                        userDb.insertShopCarTable(username,productname,shopname,number+"",price,bytes);
                     }
                     else {
                         Log.d("数据库更新","");
@@ -156,13 +170,14 @@ public class ProductMessageActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intentbuy=new Intent(ProductMessageActivity.this,SureOrderActivity.class);
 
+                //购物车信息包装传入
                 ShopCarData shopCarData=new ShopCarData();
                 shopCarData.setProducename(shopDaTa.getProductName());
                 shopCarData.setIsFirst(1);
                 shopCarData.setPrice(shopDaTa.getPrice());
                 shopCarData.setShopname(shopDaTa.getShopName());
                 shopCarData.setNumber("1");
-
+                shopCarData.setBytes(shopDaTa.getBitmaps());
                 ArrayList<ShopCarData> shopCarDatas=new ArrayList<ShopCarData>();
                 shopCarDatas.add(shopCarData);
 

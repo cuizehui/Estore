@@ -127,12 +127,26 @@ public class UserDb {
      * @param productname
      * @return
      */
-    public long insertShopCarTable(String username, String productname, String storename, String number,String price) {
+    public long insertShopCarTable(String username, String productname, String storename, String number,String price,byte[] pic) {
+        byte[] bytes=pic;
         long ret = 0;
         db.beginTransaction();
         try {
-            db.execSQL("insert into usershopcar" + "(userphone,productname,number,storename,price )values(" + username + ",'" + productname + "'" + "," + number + ",'" + storename + "'"+","+price+ ") ");
+
+            //采用这种方法 是值
+           /* db.execSQL("insert into usershopcar" + "(userphone,productname,number,storename,price,productpic)values(" + username + ",'" + productname + "'" + "," + number + ",'" + storename + "'"+","+price+ "," + bytes + ") ");
             Log.d("insert into usershopcar" + "(userphone,productname,number,storename,price )values(" + username + ",'" + productname + "'" + ",'" + storename + "'," + number + ") ", "end");
+*/
+
+            ContentValues cv=new ContentValues();
+            cv.put("userphone",username );
+            cv.put("productname",productname);//图片转为二进制
+            cv.put("number",number);
+            cv.put("storename",storename);
+            cv.put("price",price);
+            cv.put("productpic",pic);
+            db.insert("usershopcar",null,cv);
+
             db.setTransactionSuccessful();
         } catch (RuntimeException e) {
             Log.e("insert error.", e.toString());
@@ -205,11 +219,15 @@ public class UserDb {
                 int columnprice = shopCarDatacursor.getColumnIndex("price");
                 String price = shopCarDatacursor.getString(columnprice);
 
+                int columnpic = shopCarDatacursor.getColumnIndex("productpic");
+                byte[] pic= shopCarDatacursor.getBlob(columnpic);
+
+
                 shopCarData.setProducename(producename);
                 shopCarData.setNumber(number);
                 shopCarData.setShopname(storename);
                 shopCarData.setPrice(price);
-
+                shopCarData.setBytes(pic);
                 shopCarDatas.add(shopCarData);
             }
             while (shopCarDatacursor.moveToNext());

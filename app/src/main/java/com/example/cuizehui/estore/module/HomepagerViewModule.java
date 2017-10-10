@@ -1,12 +1,10 @@
 package com.example.cuizehui.estore.module;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.adapter.HomeViewpagerLVAdapter;
 import com.example.cuizehui.estore.entity.ShopDaTa;
-import com.example.cuizehui.estore.viewpagers_views.HomepagerView;
 
 import java.util.ArrayList;
 
@@ -20,6 +18,8 @@ import dagger.Provides;
 
 public class HomepagerViewModule {
     public MainActivity mainActivity;
+
+
     public HomepagerViewModule(MainActivity mainActivity) {
         this.mainActivity=mainActivity;
     }
@@ -84,4 +84,8 @@ public class HomepagerViewModule {
 
         return  homeViewpagerLVAdapter;
     }
+
+
+
+
 }

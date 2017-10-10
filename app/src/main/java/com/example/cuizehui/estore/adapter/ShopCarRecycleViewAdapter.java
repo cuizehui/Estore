@@ -1,6 +1,7 @@
 package com.example.cuizehui.estore.adapter;
 
-import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.entity.ShopCarData;
-import com.example.cuizehui.estore.viewpagers_views.BasePagerView;
 import com.example.cuizehui.estore.viewpagers_views.ShopCarView;
 
 import java.util.ArrayList;
@@ -70,6 +70,17 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
         holder.productname.setText(shopCarDatas.get(position).getProducename());
         holder.numberTV.setText(shopCarDatas.get(position).getNumber());
         holder.poductprice.setText(shopCarDatas.get(position).getPrice());
+
+
+        byte[] bytes=shopCarDatas.get(position).getBytes();
+        if(bytes!=null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+            holder.pic.setImageBitmap(bitmap);
+        }
+        else {
+            Log.d("购物车图片为空","null");
+        }
+
 
         if (position > 0) {
             if (shopCarDatas.get(position).getShopname().equals(shopCarDatas.get(position - 1).getShopname())) {
@@ -294,6 +305,8 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
         @BindView(R.id.iv_item_shopcart_cloth_delete)
         ImageView deleteIV;
 
+        @BindView(R.id.shopcar_pic)
+        ImageView pic;
 
 
         public ViewHolder(View view){
