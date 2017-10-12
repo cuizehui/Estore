@@ -14,22 +14,22 @@
 
         <TextView
             style="@style/custom_home_type_text_style"
-            android:drawableTop="@drawable/ic_all"
+            android:drawableTop="@drawable/qianggou"
             android:text="@string/xianshiqiang" />
 
         <TextView
             style="@style/custom_home_type_text_style"
-            android:drawableTop="@drawable/ic_cloud_tc"
+            android:drawableTop="@drawable/mingpindian"
             android:text="@string/mingpindian" />
 
         <TextView
             style="@style/custom_home_type_text_style"
-            android:drawableTop="@drawable/ic_charge"
+            android:drawableTop="@drawable/fenlei"
             android:text="@string/fenlei" />
 
         <TextView
             style="@style/custom_home_type_text_style"
-            android:drawableTop="@drawable/ic_world_buy"
+            android:drawableTop="@drawable/quanqiugou"
             android:text="@string/haiwaitao" />
 
     </LinearLayout>

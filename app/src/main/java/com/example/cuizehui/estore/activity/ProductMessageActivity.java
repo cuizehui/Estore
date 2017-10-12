@@ -58,6 +58,7 @@ public class ProductMessageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_message);
+        Log.d("productAcitivity","!oncreate");
         initData();
         initView();
         initEvent();
@@ -132,12 +133,12 @@ public class ProductMessageActivity extends BaseActivity {
 
                     // 插入前可先进行查询 如果已经存在 则使用更新方式 如果不存在则使用插入
                      String  selectnumber=userDb.Productnumber(username,productname);
-                int   i=Integer.parseInt(selectnumber);
+                 int   i=Integer.parseInt(selectnumber);
                      if(i==0){
                         Log.d("数据库插入","");
                         userDb.insertShopCarTable(username,productname,shopname,number+"",price,bytes);
-                    }
-                    else {
+                      }
+                    else  {
                         Log.d("数据库更新","");
                          number=number+i;
                          userDb.updataSCProductnunber(username,productname,number+"");
@@ -146,6 +147,7 @@ public class ProductMessageActivity extends BaseActivity {
 
                     //执行动画
                     Toast.makeText(ProductMessageActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
+
                 try {
                     bottomBarView.add();
                 } catch (Exception e) {

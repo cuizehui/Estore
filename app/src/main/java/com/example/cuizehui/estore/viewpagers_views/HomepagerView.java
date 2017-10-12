@@ -4,7 +4,9 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import com.example.cuizehui.estore.entity.ShopDaTa;
 import com.example.cuizehui.estore.interfaces.DaggerHomePagerViewComponent;
 import com.example.cuizehui.estore.interfaces.HomePagerViewComponent;
 import com.example.cuizehui.estore.module.HomepagerViewModule;
+import com.example.cuizehui.estore.uitls.ThreadPoolFactory;
 import com.example.cuizehui.estoredataservice.IDataAidlInterface;
 
 import java.util.ArrayList;
@@ -34,18 +37,38 @@ import javax.inject.Inject;
  */
 
 public class HomepagerView extends BasePagerView {
+
     private IDataAidlInterface mservice;
-
-
+    public   ServiceConnection connection;
     //商品GV
     public GridView home_GridView;
     public TextView textView;
-    private HomeViewpagerLVAdapter homeViewpagerLVAdapter1=null;
-    @Inject   HomeViewpagerLVAdapter homeViewpagerLVAdapter;
+    @Inject   ArrayList<ShopDaTa> thereshopDaTas;
+    private HomeViewpagerLVAdapter homeViewpagerLVAdapter=new HomeViewpagerLVAdapter(thereshopDaTas,mainActivity);
+
 
     public HomepagerView(MainActivity mainActivity) {
         super(mainActivity);
     }
+
+    //不重绘？
+
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+           switch (msg.what){
+               case 1:
+                   homeViewpagerLVAdapter.notifyDataSetChanged();
+                   home_GridView.setAdapter(homeViewpagerLVAdapter);
+
+                   Log.d("!!" , ""+homeViewpagerLVAdapter.getShopDATAsarrayList().get(0).getProductName());
+                   Log.d("通知重绘","true");
+                   break;
+           }
+
+        }
+
+    };
 
 
 
@@ -59,11 +82,17 @@ public class HomepagerView extends BasePagerView {
                 .homepagerViewModule(new HomepagerViewModule(mainActivity))
                 .build();
         homePagerViewComponent.inject(this);
+        Log.d("theredatassize ::",""+thereshopDaTas.size());
+        //获取服务器数据
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
 
+                provideServiceData();
+            }
+        };
 
-        //此方法最好在子线程中进行！
-        provideServiceData();
-
+        ThreadPoolFactory.getNormalPool().execute(runnable);
 
 
     }
@@ -75,19 +104,8 @@ public class HomepagerView extends BasePagerView {
         LayoutInflater inflater =LayoutInflater.from(mainActivity);
         //绑定任意view
         View homeview=inflater.inflate(R.layout.main_viewpager_home,null);
-
         home_GridView=  homeview.findViewById(R.id.home_pager_gv);
-
-
-      // 判断有无网络数据
-        if(homeViewpagerLVAdapter1!=null){
-            home_GridView.setAdapter(homeViewpagerLVAdapter1);
-
-        }
-        else {
-            home_GridView.setAdapter(homeViewpagerLVAdapter);
-        }
-
+         home_GridView.setAdapter(homeViewpagerLVAdapter);
         basePager_fl.addView(homeview);
 
     }
@@ -100,20 +118,8 @@ public class HomepagerView extends BasePagerView {
            @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                // 跳转  至相应界面
-               ShopDaTa shopDaTa;
-
-               //如果有服务器数据则
-               if(homeViewpagerLVAdapter1!=null){
-                    shopDaTa =homeViewpagerLVAdapter1.getShopDATAsarrayList().get(i);
-               }
-               else {
-                    shopDaTa =homeViewpagerLVAdapter.getShopDATAsarrayList().get(i);
-               }
-
-
-
+               ShopDaTa shopDaTa=homeViewpagerLVAdapter.getShopDATAsarrayList().get(i);
                Intent intent=new Intent(mainActivity, ProductMessageActivity.class);
-
                Bundle mBundle = new Bundle();
                mBundle.putSerializable("shopData",shopDaTa);
                intent.putExtras(mBundle);
@@ -129,14 +135,12 @@ public class HomepagerView extends BasePagerView {
         Intent intent =new Intent();
         intent.setAction("com.cuizehui.dataservice");
         intent.setPackage("com.example.cuizehui.estoredataservice");
-        mainActivity.bindService(intent, new ServiceConnection() {
+        connection=  new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 mservice = IDataAidlInterface.Stub.asInterface(iBinder);
-
                 //操作远程服务
-
-
+                Log.d("开始执行绑定远程服务","start");
                 List<com.example.cuizehui.estoredataservice.ShopDaTa> shopDaTas;
                 try {
                     shopDaTas=mservice.getShopDaTaList();
@@ -152,9 +156,9 @@ public class HomepagerView extends BasePagerView {
                         shopDaTa.setShopName(shopDaTas.get(i).getShopName());
                         shopDaTa.setProductdic(shopDaTas.get(i).getProductdic());
                         shopDaTa.setMailprice(shopDaTas.get(i).getMailprice());
-                         byte[] bytes;
+                        byte[] bytes;
                         if(shopDaTas.get(i).getBitmaps()!=null){
-                             bytes=shopDaTas.get(i).getBitmaps();
+                            bytes=shopDaTas.get(i).getBitmaps();
                             Log.d("bitmap_log",bytes.length+"!null");
                             shopDaTa.setBitmaps(bytes);
                         }
@@ -163,16 +167,14 @@ public class HomepagerView extends BasePagerView {
                         }
                         Log.d("context",shopDaTas.get(i).getProductName()+"");
                         arrayList.add(shopDaTa);
-
                     }
-                    homeViewpagerLVAdapter1=new HomeViewpagerLVAdapter(arrayList,mainActivity);
-
+                    homeViewpagerLVAdapter.setShopDATAsarrayList(arrayList);
                     Toast.makeText(mainActivity,shopDaTas.size()+""+":"+arrayList.size(),Toast.LENGTH_SHORT).show();
 
 
-                    //refrush
-                    initView();
-                    initEvent();
+                    Message ms= handler.obtainMessage();
+                    ms.what = 1;
+                    ms.sendToTarget();
 
                 } catch (RemoteException e) {
                     e.printStackTrace();
@@ -184,13 +186,24 @@ public class HomepagerView extends BasePagerView {
 
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
+                    homeViewpagerLVAdapter.setShopDATAsarrayList(thereshopDaTas);
                 Log.d("绑定失败","失败");
             }
-        }, mainActivity.BIND_AUTO_CREATE);
+        };
+
+       Boolean isOK= mainActivity.bindService(intent,connection , mainActivity.BIND_AUTO_CREATE);
+        Log.d("isbind?",":"+isOK);
+        if(isOK){
+
+        }
+        else
+        {
+            homeViewpagerLVAdapter.setShopDATAsarrayList(thereshopDaTas);
+        }
 
     }
 
-    //回调解绑
+
 
 
 }

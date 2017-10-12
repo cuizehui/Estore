@@ -5,7 +5,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -37,6 +37,17 @@
         <activity android:name=".activity.CreateAdressActivity" />
         <activity android:name=".activity.OrderActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <receiver android:name=".widget.TableWidget"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.com.example.cuizehui.estore.widget.Click"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/example_appwidget_info" />
+        </receiver>
+
+
     </application>
 
 </manifest>

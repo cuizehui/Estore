@@ -27,6 +27,10 @@ import butterknife.ButterKnife;
 public class HomeViewpagerLVAdapter extends BaseAdapter {
     public ArrayList<ShopDaTa> shopDATAsarrayList;
 
+    public void setShopDATAsarrayList(ArrayList<ShopDaTa> shopDATAsarrayList){
+        this.shopDATAsarrayList=shopDATAsarrayList;
+    }
+
     Context context;
    public ArrayList<ShopDaTa> getShopDATAsarrayList() {
         return shopDATAsarrayList;

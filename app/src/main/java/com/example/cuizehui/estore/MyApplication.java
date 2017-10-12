@@ -8,12 +8,14 @@ import android.util.Log;
 import com.example.cuizehui.estore.databaseutil.UserDb;
 import com.example.cuizehui.estore.entity.User;
 import com.example.cuizehui.estore.interfaces.ApplicationComponent;
-//import com.example.cuizehui.estore.interfaces.DaggerApplicationComponent;
 import com.example.cuizehui.estore.interfaces.DaggerApplicationComponent;
 import com.example.cuizehui.estore.module.ApplicationModule;
+import com.example.cuizehui.estore.uitls.CrashHandler;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.litepal.LitePal;
+
+//import com.example.cuizehui.estore.interfaces.DaggerApplicationComponent;
 
 /**
  * Created by cuizehui on 17-9-13.
@@ -34,6 +36,11 @@ public class MyApplication extends Application
             initAppComponent();
             Fresco.initialize(this);
             LitePal.initialize(this);
+
+            //在这里为应用设置异常处理程序，然后我们的程序才能捕获未处理的异常
+            CrashHandler crashHandler = CrashHandler.getInstance();
+            crashHandler.init(this);
+
         }
 
 
@@ -80,9 +87,14 @@ public class MyApplication extends Application
     }
     //跳转至目标activity
     public void jumpToTargetActivity(Context context) {
-
+        //原因就是这里没有 执行startActivityForResult(); 这里缺少返回码
         context.startActivity(intent);
         this.intent = null;
+    }
+    public void jumpToTargetActivity(int requestCode,MainActivity mainActivity){
+
+        mainActivity.startActivityForResult(intent,requestCode);
+         this.intent = null;
     }
 
 }

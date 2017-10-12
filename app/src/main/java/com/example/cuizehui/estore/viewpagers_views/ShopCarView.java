@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.MyApplication;
 import com.example.cuizehui.estore.R;
-import com.example.cuizehui.estore.activity.ProductMessageActivity;
 import com.example.cuizehui.estore.activity.SureOrderActivity;
 import com.example.cuizehui.estore.adapter.ShopCarRecycleViewAdapter;
 import com.example.cuizehui.estore.databaseutil.UserDb;
@@ -24,8 +22,6 @@ import com.example.cuizehui.estore.entity.ShopCarData;
 import com.example.cuizehui.estore.entity.User;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
 
 
 /**
@@ -81,35 +77,26 @@ public class ShopCarView extends  BasePagerView {
         LayoutInflater inflater =LayoutInflater.from(mainActivity);
         View shopcarview=inflater.inflate(R.layout.main_viewpager_shopcar,null);
         mRecyclerView=shopcarview.findViewById(R.id.shopcar_recyclerView);
-
         tvShopCartSelect=shopcarview.findViewById(R.id.tv_shopcart_addselect);
-
         tvShopCartTotalNum=shopcarview.findViewById(R.id.tv_shopcart_totalnum);
         tv_shopcart_totalprice=shopcarview.findViewById( R.id.tv_shopcart_totalprice);
-
         imptyi=shopcarview.findViewById(R.id.umpty_iv);
         if(shopCarDatas.size()==0){
             imptyi.setVisibility(View.VISIBLE);
-
         }
         else {
             imptyi.setVisibility(View.GONE);
-
         }
         tvcommitOrder=shopcarview.findViewById(R.id.tv_shopcart_submit);
-
         //设置布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
         //设置adapter
-
         mRecyclerView.setAdapter(shopCarRecycleViewAdapter);
         //设置Item增加、移除动画
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         //添加分割线
         //   mRecyclerView.addItemDecoration(new DividerItemDecoration(mainActivity, DividerItemDecoration.HORIZONTAL_LIST));
         basePager_fl.addView(shopcarview);
-
-
     }
 
 
@@ -125,10 +112,7 @@ public class ShopCarView extends  BasePagerView {
         if(user!=null){
             //拉取数据库 购物车商品信息
           //  Log.d("shopCarview","initdata2");
-
-
             userDb= MyApplication.getInstance(mainActivity).getUserDatedb();
-
             //返回 按商店排序的数据集合
             Cursor cursor= userDb.selectPdOrderByShopName(user.getAccount());
             shopCarDatas = userDb.passShopCarMessage(cursor);
@@ -138,7 +122,6 @@ public class ShopCarView extends  BasePagerView {
             if(shopCarDatas.size()==0){
                 //设置空数据
                shopCarDatas=new ArrayList<>();
-
             }
             else {
                 //获取真数据并排序
@@ -146,16 +129,12 @@ public class ShopCarView extends  BasePagerView {
                 isSelectFirst(shopCarDatas);
             }
             shopCarRecycleViewAdapter=new ShopCarRecycleViewAdapter(mainActivity,shopCarDatas,shopCarView);
-
-
-
         }
         else
             {
              shopCarDatas=new ArrayList<>();
              shopCarRecycleViewAdapter=new ShopCarRecycleViewAdapter(mainActivity,shopCarDatas,shopCarView);
         }
-
 
 
     }
@@ -218,7 +197,6 @@ public class ShopCarView extends  BasePagerView {
                 else {
                 }
 
-
             }
         });
         //
@@ -277,9 +255,6 @@ public class ShopCarView extends  BasePagerView {
                     startsureOrderActivity.putExtra("dataBean",selectShopCardata);
                     startsureOrderActivity.putExtra("flag","shopcar");
                     mainActivity.startActivity(startsureOrderActivity);
-
-
-
                 }
             }
         });

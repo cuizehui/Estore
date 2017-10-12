@@ -8,6 +8,7 @@ import com.example.cuizehui.estore.R;
 
 /**
  * Created by cuizehui on 17-9-14.
+ * 抢购界面 计时器！
  */
 
 public class ShopPagerView  extends  BasePagerView{

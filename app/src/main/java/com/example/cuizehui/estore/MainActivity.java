@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.view.ViewPager;
-
 import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.cuizehui.estore.adapter.MainViewPagerAdapter;
 import com.example.cuizehui.estore.base.BaseActivity;
-
 import com.example.cuizehui.estore.entity.RefrushMain;
 import com.example.cuizehui.estore.entity.StringFlag;
 import com.example.cuizehui.estore.entity.User;
@@ -20,9 +18,9 @@ import com.example.cuizehui.estore.interfaces.DaggerMainActivityComponent;
 import com.example.cuizehui.estore.interfaces.MainActivityComponent;
 import com.example.cuizehui.estore.module.MainActivityModule;
 import com.example.cuizehui.estore.uitls.Contants;
+import com.example.cuizehui.estore.viewpagers_views.HomepagerView;
 import com.example.cuizehui.estore.viewpagers_views.MinePagerView;
 import com.example.cuizehui.estore.viewpagers_views.ShopCarView;
-
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -65,10 +63,10 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind( this ) ;
 
         EventBus.getDefault().register(this);
-
         initView();
         initData();
         initEvent();
+
 
     }
 
@@ -232,13 +230,16 @@ public class MainActivity extends BaseActivity {
 
         }
 
+        //登录完成后 获取到保存的状态进行后续操作
          if (user != null) {
             //跳转至目标Activity
             if (MyApplication.getInstance(this).getIntent() == null) {
 
             }
             else {
-                MyApplication.getInstance(this).jumpToTargetActivity(this);
+               MyApplication.getInstance(this).jumpToTargetActivity(2,this);
+              //  MyApplication.getInstance(this).jumpToTargetActivity(this);
+
             }
         }
         else {
@@ -303,6 +304,11 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
         //取消事件注册
         EventBus.getDefault().unregister(this);
+
+        HomepagerView homepagerView =(HomepagerView) mainViewPagerAdapter.getPagerViewArrayList().get(0);
+        this.unbindService(homepagerView.connection);
+
+
     }
 
 }

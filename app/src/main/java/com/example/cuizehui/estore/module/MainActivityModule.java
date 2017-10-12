@@ -42,11 +42,11 @@ public class MainActivityModule {
     public ArrayList<BasePagerView> providePagerViews(){
 
         ArrayList<BasePagerView>   pagerViews=new ArrayList<>();
-        pagerViews.add(new HomepagerView(mainActivity));
+        HomepagerView homepagerView=new HomepagerView(mainActivity);
+        pagerViews.add(homepagerView);
         pagerViews.add(new ShopPagerView(mainActivity));
         pagerViews.add(new ShopCarView(mainActivity));
         pagerViews.add(new MinePagerView(mainActivity));
-
         return  pagerViews;
     }
 

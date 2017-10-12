@@ -38,7 +38,7 @@
              android:layout_gravity="center_horizontal"
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
-             android:background="@drawable/umpty"/>
+             android:background="@drawable/shopcar_null"/>
     </LinearLayout>
 
     <LinearLayout

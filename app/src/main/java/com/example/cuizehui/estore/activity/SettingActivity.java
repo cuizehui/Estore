@@ -3,6 +3,7 @@ package com.example.cuizehui.estore.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,12 @@ public class SettingActivity extends BaseActivity {
     Button logoutBtn;
     @BindView(R.id.person_massege)
     TextView personMassege;
+    @BindView(R.id.table_widget)
+    TextView table_widget;
+
+    private WindowManager wm;
+
+    private WindowManager.LayoutParams params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +92,13 @@ public class SettingActivity extends BaseActivity {
                 stringFlag.setFlag("logout");
                 EventBus.getDefault().post(stringFlag);
                 finish();
+            }
+        });
+
+        table_widget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

@@ -3,7 +3,6 @@ package com.example.cuizehui.estore.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -35,7 +34,7 @@ public class LoginActivity extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+          Log.d("logActivity","!");
         initView();
         initEvent();
 

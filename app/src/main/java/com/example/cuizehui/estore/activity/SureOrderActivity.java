@@ -224,7 +224,7 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
          finish();
     }
 
-    //生成订单
+    //生成订单 此方法 属于耗时操作
     private void makeOrder(String uri){
         for(int i=0;i<shopCarDatas.size();i++){
             ShopCarData shopCarData=  shopCarDatas.get(i);
