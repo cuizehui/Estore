@@ -70,6 +70,7 @@ public class TableWidget extends AppWidgetProvider {
          Bitmap bitmap= BitmapFactory.decodeResource(context.getResources(),R.drawable.tabl);
          remoteViews.setImageViewBitmap(R.id.table_imageview,rotateBitmap(context,bitmap,180));
 
+
          appWidgetManager.updateAppWidget(new ComponentName(context,TableWidget.class),remoteViews);
 
 

@@ -7,7 +7,7 @@ import com.example.cuizehui.estore.viewpagers_views.BasePagerView;
 import com.example.cuizehui.estore.viewpagers_views.HomepagerView;
 import com.example.cuizehui.estore.viewpagers_views.MinePagerView;
 import com.example.cuizehui.estore.viewpagers_views.ShopCarView;
-import com.example.cuizehui.estore.viewpagers_views.ShopPagerView;
+import com.example.cuizehui.estore.viewpagers_views.FlashSaleView;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public class MainActivityModule {
         ArrayList<BasePagerView>   pagerViews=new ArrayList<>();
         HomepagerView homepagerView=new HomepagerView(mainActivity);
         pagerViews.add(homepagerView);
-        pagerViews.add(new ShopPagerView(mainActivity));
+        pagerViews.add(new FlashSaleView(mainActivity));
         pagerViews.add(new ShopCarView(mainActivity));
         pagerViews.add(new MinePagerView(mainActivity));
         return  pagerViews;

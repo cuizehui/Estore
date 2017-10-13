@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+
+
+        <ImageView
+            android:id="@+id/shopcar_pic"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="@dimen/margin_10dp"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/tv_item_shopcart_product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="原价： + 现价"
+                android:textColor="@color/main_red_text"
+                android:textSize="@dimen/common_font_size_14"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_marginBottom="@dimen/margin_5dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="开始时间"
+                    android:textSize="@dimen/common_font_size_12"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11:00"
+                    android:textSize="@dimen/common_font_size_12"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                >
+
+
+
+                <TextView
+                    android:id="@+id/et_item_shopcart_cloth_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/padding_2dp"
+                    android:paddingBottom="@dimen/padding_2dp"
+                    android:paddingLeft="@dimen/padding_20dp"
+                    android:paddingRight="@dimen/padding_20dp"
+                    android:background="@drawable/shopcart_add_btn"
+                    android:layout_marginLeft="@dimen/margin_5dp"
+                    android:text="开抢提醒"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

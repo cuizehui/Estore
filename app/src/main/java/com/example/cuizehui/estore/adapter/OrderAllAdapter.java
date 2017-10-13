@@ -26,6 +26,7 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
    List<OrderMessage> orderMessages;
     OrderActivity context;
     private int ITEM_HEADER = 1,ITEM_CONTENT = 2,ITEM_FOOTER = 3;
+     public Bitmap bitmap;
 
     public OrderAllAdapter(List<OrderMessage> orderMessages, OrderActivity context) {
         super();
@@ -56,9 +57,11 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
         byte[] bytes=orderMessages.get(position).getOrderpic();
 
         if(bytes!=null){
-            Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-            holder.order_iv.setImageBitmap(bitmap);
+            // 5次就会OOM 异常？  //可以进行缓存 处理 也可以进行 收回？
+            //成员变量
+            bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
 
+            holder.order_iv.setImageBitmap(bitmap);
         }else {
 
         }

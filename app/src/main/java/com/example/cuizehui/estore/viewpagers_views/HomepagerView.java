@@ -130,6 +130,10 @@ public class HomepagerView extends BasePagerView {
 
     }
 
+
+    /**|
+     * 会出现绑定失败  多个线程操作一个 服务的状态
+     */
     public void  provideServiceData(){
         //调用远程服务
         Intent intent =new Intent();

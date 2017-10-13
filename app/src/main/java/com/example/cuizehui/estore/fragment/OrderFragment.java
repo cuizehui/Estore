@@ -1,9 +1,6 @@
 package com.example.cuizehui.estore.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,7 +13,6 @@ import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.activity.OrderActivity;
 import com.example.cuizehui.estore.adapter.OrderAllAdapter;
 import com.example.cuizehui.estore.entity.OrderMessage;
-import com.example.cuizehui.estore.entity.ShopAdress;
 import com.example.cuizehui.estore.entity.User;
 
 import org.litepal.crud.DataSupport;
@@ -92,6 +88,18 @@ public class OrderFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("orderFragment "," stop");
+    }
 
+    @Override
+    public void onDestroy() {
 
+        orderAllAdapter.bitmap.recycle();
+        super.onDestroy();
+        Log.d("orderFragment "," destroy");
+
+    }
 }
