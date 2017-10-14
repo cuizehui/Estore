@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/product_mianpic"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:src="@drawable/productdemo"
             android:visibility="visible" />
@@ -28,7 +28,7 @@
                 style="@style/blackTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="日本卡乐比Calbee Jagabee 薯条三兄弟 淡盐味" />
+                android:text="薯条三兄弟 淡盐味" />
 
             <TextView
                 style="@style/blackTextStyleSmall"
@@ -142,21 +142,8 @@
                 android:text="赔运费险"
                 android:textSize="@dimen/font_smaller" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_smaller"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/da_ren_services_tick"
-                android:drawablePadding="@dimen/spacing_tiny"
-                android:text="7天退换"
-                android:textSize="@dimen/font_smaller" />
 
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/rightarrow" />
+
         </LinearLayout>
 
         <include layout="@layout/layout_line" />
@@ -255,7 +242,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="谢依霖" />
+                            android:text="泥蜡" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -292,20 +279,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_tinyest"
-                        android:text="2016年04月" />
+                        android:text="2017年07月" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_tinyest"
-                        android:text="第二次来找这个零食了，第一次吃就开始爱上了，还是跟原来一样的味道" />
+                        android:text="不错，给我再来5个" />
 
                     <TextView
                         style="@style/greyTextStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_tinyest"
-                        android:text="颜色分类：原味" />
+                        android:text="颜色分类：黑的" />
 
                 </LinearLayout>
 

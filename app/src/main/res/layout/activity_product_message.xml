@@ -54,7 +54,7 @@
             android:paddingLeft="@dimen/spacing_smaller"
             android:paddingRight="@dimen/spacing_small"
             android:paddingTop="@dimen/spacing_smallest"
-            myBBview:iconpic="@drawable/ic_v_cart"
+            myBBview:iconpic="@drawable/shopcar"
             >
 
         </com.example.cuizehui.estore.widget.BottomBarView>
@@ -96,16 +96,7 @@
             android:background="@color/white"
             android:orientation="horizontal">
 
-            <TextView
-                android:gravity="center"
-                style="@style/greyTextStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_smallest"
-                android:layout_marginRight="@dimen/spacing_smallest"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/kefu"
-                android:text="客服" />
+
 
             <View
                 android:layout_width="0.5dp"
@@ -120,7 +111,7 @@
                 style="@style/greyTextStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/kefu"
+                android:drawableTop="@drawable/shop"
                 android:layout_marginLeft="@dimen/spacing_smallest"
                 android:layout_marginRight="@dimen/spacing_smallest"
                 android:layout_weight="1"
@@ -142,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@drawable/da_ren_all_0007_shou_cang"
+                    android:src="@drawable/shoucang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ImageView
@@ -165,7 +156,7 @@
             android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary">
+            android:background="@color/original_border_color">
 
             <TextView
                 android:id="@+id/tv_add_shopcar"

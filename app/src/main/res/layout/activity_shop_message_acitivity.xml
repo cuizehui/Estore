@@ -11,10 +11,11 @@
         layout="@layout/shop_goinsearch_layout" />
 
     <RelativeLayout
+        android:id="@+id/shopmessage_rl"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_below="@id/title"
-        android:background="@color/black">
+        android:background="@color/original_border_color">
 
         <ImageView
             android:layout_width="match_parent"
@@ -33,13 +34,6 @@
             android:gravity="bottom"
             android:orientation="horizontal">
 
-     <!--       <com.facebook.drawee.view.DraweeView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_marginLeft="@dimen/largePadding"
-                android:scaleType="centerCrop"
-                android:src="@drawable/pp_shoes" />-->
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/ic_v_pp"
-                    android:text="小姑娘的店"
+                    android:text="nela的店"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -82,32 +76,12 @@
 
     </RelativeLayout>
 
-<!--
-    <com.flyco.tablayout.CommonTabLayout
-        android:id="@+id/common_tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/user_avater_container"
-        flyco:tl_divider_width="32dp"
-        flyco:tl_indicator_bounce_enable="true"
-        android:background="@color/white"
-        flyco:tl_indicator_gradient_colors="@array/slider_colors"
-        flyco:tl_tab_space_equal="true"
-        flyco:tl_textSelectColor="@color/purple"
-        flyco:tl_textUnselectColor="@color/transparent_cus_5f"
-        flyco:tl_textsize="16sp" />
--->
 
-    <!--android:layout_below="@+id/common_tab_layout"-->
-    <View
-        android:id="@+id/divider"
-        style="@style/line_vertical"
-    />
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/divider" />
+        android:layout_below="@id/shopmessage_rl" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -123,7 +97,7 @@
             android:text="店铺信息"
             android:textSize="16sp"
             android:gravity="center"
-            android:textColor="@color/black" />
+            android:textColor="@color/original_border_color" />
 
         <View style="@style/line_horizontal" />
 
@@ -140,7 +114,7 @@
                 android:drawablePadding="@dimen/smallerPadding"
                 android:layout_centerInParent="true"
                 android:text="店铺分类"
-                android:textColor="@color/black" />
+                android:textColor="@color/original_border_color" />
         </RelativeLayout>
 
         <View style="@style/line_horizontal" />
@@ -152,6 +126,6 @@
             android:gravity="center"
             android:text="二维码"
             android:textSize="16sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/original_border_color" />
     </LinearLayout>
 </RelativeLayout>

@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:id="@+id/flash_sale_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -25,48 +26,63 @@
             android:orientation="vertical"
             >
 
+
             <TextView
-                android:id="@+id/tv_item_shopcart_product_price"
+                android:id="@+id/flash_sale_tv_productname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="原价： + 现价"
-                android:textColor="@color/main_red_text"
+                android:text="产品名"
+
                 android:textSize="@dimen/common_font_size_14"
                 />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/flash_sale_tv_oldprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="原价： "
+                android:textColor="@color/original_border_color"
+                android:textSize="@dimen/common_font_size_14"
+                />
+            <TextView
+                android:id="@+id/flash_sale_tv_nowprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="现价： + "
+                android:textColor="@color/original_border_color"
+                android:textSize="@dimen/common_font_size_14"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp"
                 android:layout_marginTop="@dimen/margin_5dp"
                 android:layout_marginBottom="@dimen/margin_5dp"
                 >
 
                 <TextView
+                    android:id="@+id/starttimet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="开始时间"
                     android:textSize="@dimen/common_font_size_12"
+
                     />
 
                 <TextView
+                    android:layout_toRightOf="@id/starttimet"
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="11:00"
                     android:textSize="@dimen/common_font_size_12"
                     android:layout_marginLeft="@dimen/margin_10dp"
                     />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                >
-
-
-
                 <TextView
+
+                    android:layout_alignParentRight="true"
                     android:id="@+id/et_item_shopcart_cloth_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,13 +91,17 @@
                     android:paddingLeft="@dimen/padding_20dp"
                     android:paddingRight="@dimen/padding_20dp"
                     android:background="@drawable/shopcart_add_btn"
-                    android:layout_marginLeft="@dimen/margin_5dp"
-                    android:text="开抢提醒"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/original_border_color"
+                    android:text="提醒"
                     />
 
-
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:background="@drawable/line_flashsale"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
 </LinearLayout>

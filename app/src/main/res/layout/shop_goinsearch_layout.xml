@@ -18,7 +18,6 @@
         android:layout_margin="@dimen/middlePadding"
         android:layout_toLeftOf="@+id/tt_msg_iv"
         android:layout_toRightOf="@+id/tt_scan_iv"
-        android:background="@drawable/shape_rrect_gosear"
         android:drawableLeft="@drawable/ic_fdj"
         android:hint="搜索店内商品"
         android:maxLines="1"

@@ -1,5 +1,6 @@
 package com.example.cuizehui.estore.presenter;
 
+import com.example.cuizehui.estore.entity.FlashPruductData;
 import com.example.cuizehui.estore.viewpagers_views.FlashSaleMVPView;
 
 /**
@@ -19,4 +20,10 @@ public interface FlashSalePresenter {
      *
      */
     public void loadRepositories() ;
+
+    /**
+     * 跳转至flashSaleProductActivity
+     */
+    public void jumptoflashSaleProductActivity(FlashPruductData flashPruductData);
+
 }

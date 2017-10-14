@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.R;
 import com.example.cuizehui.estore.activity.ProductMessageActivity;
+import com.example.cuizehui.estore.activity.ShopMessageAcitivity;
 import com.example.cuizehui.estore.adapter.HomeViewpagerLVAdapter;
 import com.example.cuizehui.estore.entity.ShopDaTa;
 import com.example.cuizehui.estore.interfaces.DaggerHomePagerViewComponent;
@@ -43,8 +44,13 @@ public class HomepagerView extends BasePagerView {
     //商品GV
     public GridView home_GridView;
     public TextView textView;
+
     @Inject   ArrayList<ShopDaTa> thereshopDaTas;
-    private HomeViewpagerLVAdapter homeViewpagerLVAdapter=new HomeViewpagerLVAdapter(thereshopDaTas,mainActivity);
+
+
+    private HomeViewpagerLVAdapter homeViewpagerLVAdapter;
+    private TextView qianggou_tv;
+    private TextView mingpindian_tv;
 
 
     public HomepagerView(MainActivity mainActivity) {
@@ -82,17 +88,8 @@ public class HomepagerView extends BasePagerView {
                 .homepagerViewModule(new HomepagerViewModule(mainActivity))
                 .build();
         homePagerViewComponent.inject(this);
-        Log.d("theredatassize ::",""+thereshopDaTas.size());
-        //获取服务器数据
-        Runnable runnable=new Runnable() {
-            @Override
-            public void run() {
 
-                provideServiceData();
-            }
-        };
-
-        ThreadPoolFactory.getNormalPool().execute(runnable);
+        homeViewpagerLVAdapter=new HomeViewpagerLVAdapter(thereshopDaTas,mainActivity);
 
 
     }
@@ -105,8 +102,25 @@ public class HomepagerView extends BasePagerView {
         //绑定任意view
         View homeview=inflater.inflate(R.layout.main_viewpager_home,null);
         home_GridView=  homeview.findViewById(R.id.home_pager_gv);
+
+        qianggou_tv=homeview.findViewById(R.id.tv_qianggou);
+        mingpindian_tv=homeview.findViewById(R.id.tv_mingpindian);
+
          home_GridView.setAdapter(homeViewpagerLVAdapter);
         basePager_fl.addView(homeview);
+
+        Log.d("theredatassize ::",""+thereshopDaTas.size());
+        //获取服务器数据
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+
+                provideServiceData();
+            }
+        };
+
+        ThreadPoolFactory.getNormalPool().execute(runnable);
+
 
     }
 
@@ -128,11 +142,27 @@ public class HomepagerView extends BasePagerView {
            }
        });
 
+
+        qianggou_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.switchViewpager(1);
+            }
+        });
+        mingpindian_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mainActivity, ShopMessageAcitivity.class);
+                mainActivity.startActivity(intent);
+            }
+        });
     }
 
 
     /**|
      * 会出现绑定失败  多个线程操作一个 服务的状态
+     *
+     * 由于在线程中执行  执行结束后可能没赶上SetAdapter
      */
     public void  provideServiceData(){
         //调用远程服务
@@ -190,8 +220,10 @@ public class HomepagerView extends BasePagerView {
 
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
-                    homeViewpagerLVAdapter.setShopDATAsarrayList(thereshopDaTas);
                 Log.d("绑定失败","失败");
+
+                homeViewpagerLVAdapter.setShopDATAsarrayList(thereshopDaTas);
+                    home_GridView.setAdapter(homeViewpagerLVAdapter);
             }
         };
 
@@ -202,7 +234,13 @@ public class HomepagerView extends BasePagerView {
         }
         else
         {
-            homeViewpagerLVAdapter.setShopDATAsarrayList(thereshopDaTas);
+          Log.d("thresshopDatas"," :: " + thereshopDaTas.size());
+
+                homeViewpagerLVAdapter.setShopDATAsarrayList(thereshopDaTas);
+
+                homeViewpagerLVAdapter.notifyDataSetChanged();
+
+
         }
 
     }

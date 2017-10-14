@@ -77,6 +77,14 @@ public class FlashSaleView extends  BasePagerView implements FlashSaleMVPView{
 
     private void setupRecyclerView(RecyclerView recyclerView) {
          flashSaleRecycleViewAdapter=new FlashSaleRecycleViewAdapter();
+
+        flashSaleRecycleViewAdapter.setItemClickCallback(new FlashSaleRecycleViewAdapter.ItemClickCallback() {
+            @Override
+            public void onItemClick(FlashPruductData flashPruductData) {
+                flashSalePresenter.jumptoflashSaleProductActivity(flashPruductData);
+            }
+        });
+
         recyclerView.setAdapter(flashSaleRecycleViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
     }
@@ -87,8 +95,12 @@ public class FlashSaleView extends  BasePagerView implements FlashSaleMVPView{
         //获取同一个？？！！！
         Log.d("刷新UI","start");
         FlashSaleRecycleViewAdapter adapter= (FlashSaleRecycleViewAdapter) recyclerView.getAdapter();
-
         adapter.setFlashSalerepositories(repositories);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public MainActivity getMainActivity() {
+        return mainActivity;
     }
 }

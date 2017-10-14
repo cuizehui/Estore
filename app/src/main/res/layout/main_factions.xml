@@ -10,26 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/middlePadding"
+        android:background="@drawable/mianlist_backgroud"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_qianggou"
             style="@style/custom_home_type_text_style"
             android:drawableTop="@drawable/qianggou"
+            android:textColor="@color/original_border_color"
             android:text="@string/xianshiqiang" />
 
         <TextView
+            android:id="@+id/tv_mingpindian"
             style="@style/custom_home_type_text_style"
             android:drawableTop="@drawable/mingpindian"
+            android:textColor="@color/original_border_color"
             android:text="@string/mingpindian" />
 
         <TextView
             style="@style/custom_home_type_text_style"
             android:drawableTop="@drawable/fenlei"
+            android:textColor="@color/original_border_color"
             android:text="@string/fenlei" />
 
         <TextView
             style="@style/custom_home_type_text_style"
             android:drawableTop="@drawable/quanqiugou"
+            android:textColor="@color/original_border_color"
             android:text="@string/haiwaitao" />
 
     </LinearLayout>

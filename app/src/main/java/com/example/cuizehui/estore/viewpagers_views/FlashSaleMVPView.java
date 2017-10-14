@@ -1,5 +1,6 @@
 package com.example.cuizehui.estore.viewpagers_views;
 
+import com.example.cuizehui.estore.MainActivity;
 import com.example.cuizehui.estore.entity.FlashPruductData;
 
 import java.util.ArrayList;
@@ -11,4 +12,6 @@ import java.util.ArrayList;
 
 public interface FlashSaleMVPView {
     public void reupRepositories(ArrayList<FlashPruductData> repositories);
+
+    public MainActivity getMainActivity();
 }
