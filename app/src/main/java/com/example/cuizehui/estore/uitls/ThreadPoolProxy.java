@@ -1,5 +1,7 @@
 package com.example.cuizehui.estore.uitls;
 
+import android.util.Log;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -63,6 +65,7 @@ public class ThreadPoolProxy {
     /**移除任务*/
     public void removeTask(Runnable task) {
         initThreadPoolExecutor();
-        mExecutor.remove(task);
+       Boolean isremove= mExecutor.remove(task);
+        Log.d("removetask","!!!"+isremove);
     }
 }

@@ -3,16 +3,21 @@ package com.example.cuizehui.estore.viewpagers_views;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ import com.example.cuizehui.estore.interfaces.DaggerHomePagerViewComponent;
 import com.example.cuizehui.estore.interfaces.HomePagerViewComponent;
 import com.example.cuizehui.estore.module.HomepagerViewModule;
 import com.example.cuizehui.estore.uitls.ThreadPoolFactory;
+import com.example.cuizehui.estore.uitls.ThreadPoolProxy;
 import com.example.cuizehui.estoredataservice.IDataAidlInterface;
 
 import java.util.ArrayList;
@@ -44,22 +50,25 @@ public class HomepagerView extends BasePagerView {
     //商品GV
     public GridView home_GridView;
     public TextView textView;
-
     @Inject   ArrayList<ShopDaTa> thereshopDaTas;
 
 
     private HomeViewpagerLVAdapter homeViewpagerLVAdapter;
     private TextView qianggou_tv;
     private TextView mingpindian_tv;
+    private ViewPager lunbo_viewpager;
+    ArrayList<Drawable> drawables;
 
+    public  Thread lunbothread;
+    public  Runnable lunborunnable;
 
     public HomepagerView(MainActivity mainActivity) {
         super(mainActivity);
     }
 
-    //不重绘？
 
-    Handler handler=new Handler(){
+
+    public final Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
            switch (msg.what){
@@ -69,6 +78,11 @@ public class HomepagerView extends BasePagerView {
 
                    Log.d("!!" , ""+homeViewpagerLVAdapter.getShopDATAsarrayList().get(0).getProductName());
                    Log.d("通知重绘","true");
+                   break;
+
+               case 2:
+
+                   lunbo_viewpager.setCurrentItem((lunbo_viewpager.getCurrentItem()+1)%lunbo_viewpager.getAdapter().getCount());
                    break;
            }
 
@@ -92,6 +106,15 @@ public class HomepagerView extends BasePagerView {
         homeViewpagerLVAdapter=new HomeViewpagerLVAdapter(thereshopDaTas,mainActivity);
 
 
+             drawables=new ArrayList<>();
+
+            drawables.add( mainActivity.getResources().getDrawable(R.drawable.tabl));
+            drawables.add(mainActivity.getResources().getDrawable(R.drawable.shop));
+            drawables.add(mainActivity.getResources().getDrawable(R.drawable.tabl));
+            drawables.add(mainActivity.getResources().getDrawable(R.drawable.shop));
+
+
+
     }
 
     @Override
@@ -101,15 +124,95 @@ public class HomepagerView extends BasePagerView {
         LayoutInflater inflater =LayoutInflater.from(mainActivity);
         //绑定任意view
         View homeview=inflater.inflate(R.layout.main_viewpager_home,null);
+        lunbo_viewpager=homeview.findViewById(R.id.lunbo_vp);
         home_GridView=  homeview.findViewById(R.id.home_pager_gv);
 
         qianggou_tv=homeview.findViewById(R.id.tv_qianggou);
         mingpindian_tv=homeview.findViewById(R.id.tv_mingpindian);
 
-         home_GridView.setAdapter(homeViewpagerLVAdapter);
+        home_GridView.setAdapter(homeViewpagerLVAdapter);
         basePager_fl.addView(homeview);
 
+
+
+
+        lunbo_viewpager.setAdapter(new PagerAdapter() {
+            @Override
+            public int getCount() {
+                return drawables.size();
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view==object;
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                LayoutInflater layoutInflater=LayoutInflater.from(mainActivity);
+                View view=layoutInflater.inflate(R.layout.lunbo_viewpager,null);
+                ImageView imageView=  view.findViewById(R.id.lunbo_iV);
+                imageView.setImageDrawable(drawables.get(position));
+                container.addView(view);
+                return view;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((View) object);
+            }
+        });
+
+
+
+//中断阻塞异常    抛异常 ！！！
+        lunborunnable=new Runnable() {
+            @Override
+            public void run() {
+                  Boolean isrun=true;
+                    try {
+                        lunbothread.sleep(1500);
+
+                        while (isrun) {
+                            Log.d("homeview","::"+lunbothread.currentThread().isInterrupted());
+                            if (lunbothread.currentThread().isInterrupted()) {
+                                return;
+                            }
+
+                            if (handler != null) {
+                                try {
+                                    lunbothread.sleep(2000);
+                                    Message lunbo_ms = handler.obtainMessage();
+                                    lunbo_ms.what = 2;
+                                    lunbo_ms.sendToTarget();
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                    return;
+                                }
+                                Log.d("is execute?", "handler?");
+
+                            } else {
+
+                                Log.d("handlernull", "handler?");
+                            }
+                        }
+
+
+                    } catch (InterruptedException e) {
+
+                        e.printStackTrace();
+                    }
+
+
+            }
+        };
+        lunbothread=new Thread(lunborunnable);
+         lunbothread.start();
         Log.d("theredatassize ::",""+thereshopDaTas.size());
+
+
+
         //获取服务器数据
         Runnable runnable=new Runnable() {
             @Override
@@ -118,8 +221,12 @@ public class HomepagerView extends BasePagerView {
                 provideServiceData();
             }
         };
+        ThreadPoolProxy threadPoolProxy=ThreadPoolFactory.getNormalPool();
 
-        ThreadPoolFactory.getNormalPool().execute(runnable);
+        threadPoolProxy.execute(runnable);
+
+
+
 
 
     }
@@ -156,6 +263,8 @@ public class HomepagerView extends BasePagerView {
                 mainActivity.startActivity(intent);
             }
         });
+
+
     }
 
 
@@ -182,7 +291,6 @@ public class HomepagerView extends BasePagerView {
                     ArrayList<ShopDaTa> arrayList=new ArrayList<>();
 
                     for (int i=0;i<shopDaTas.size();i++){
-
                         ShopDaTa shopDaTa=new ShopDaTa();
                         shopDaTa.setPicadress(shopDaTas.get(i).getPicadress());
                         shopDaTa.setPrice(shopDaTas.get(i).getPrice());
@@ -206,9 +314,14 @@ public class HomepagerView extends BasePagerView {
                     Toast.makeText(mainActivity,shopDaTas.size()+""+":"+arrayList.size(),Toast.LENGTH_SHORT).show();
 
 
+
+
                     Message ms= handler.obtainMessage();
                     ms.what = 1;
                     ms.sendToTarget();
+
+
+
 
                 } catch (RemoteException e) {
                     e.printStackTrace();
@@ -223,24 +336,21 @@ public class HomepagerView extends BasePagerView {
                 Log.d("绑定失败","失败");
 
                 homeViewpagerLVAdapter.setShopDATAsarrayList(thereshopDaTas);
-                    home_GridView.setAdapter(homeViewpagerLVAdapter);
+                home_GridView.setAdapter(homeViewpagerLVAdapter);
             }
         };
 
+
        Boolean isOK= mainActivity.bindService(intent,connection , mainActivity.BIND_AUTO_CREATE);
+
         Log.d("isbind?",":"+isOK);
         if(isOK){
-
         }
         else
         {
           Log.d("thresshopDatas"," :: " + thereshopDaTas.size());
-
                 homeViewpagerLVAdapter.setShopDATAsarrayList(thereshopDaTas);
-
                 homeViewpagerLVAdapter.notifyDataSetChanged();
-
-
         }
 
     }

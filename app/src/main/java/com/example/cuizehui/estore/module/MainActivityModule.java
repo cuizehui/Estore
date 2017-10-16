@@ -43,6 +43,7 @@ public class MainActivityModule {
 
         ArrayList<BasePagerView>   pagerViews=new ArrayList<>();
         HomepagerView homepagerView=new HomepagerView(mainActivity);
+
         pagerViews.add(homepagerView);
         pagerViews.add(new FlashSaleView(mainActivity));
         pagerViews.add(new ShopCarView(mainActivity));

@@ -85,9 +85,17 @@ public class HomeViewpagerLVAdapter extends BaseAdapter {
         byte[] bytes= shopDaTa.getBitmaps();
         if(bytes!=null){
             Log.d("bitmap_bytes size:",""+bytes.length);
+
+            //获取路径
+
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
+            /***
+             * if drawee view  !=null
+             * 就 不转化bitmap
+             */
             holder.draweeView.setImageBitmap(bitmap);
+
 
         }
         else {

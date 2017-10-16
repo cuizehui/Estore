@@ -311,4 +311,20 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        HomepagerView homepagerView =(HomepagerView) mainViewPagerAdapter.getPagerViewArrayList().get(0);
+
+        if(homepagerView.lunbothread!=null){
+            Log.d("lunbothread","main isinterrupted? :"+ homepagerView.lunbothread.isAlive());
+            homepagerView.lunbothread.interrupt();
+            Log.d("lunbothread","main isinterrupted? :"+homepagerView.lunbothread.isInterrupted());
+
+        }
+        else {
+            Log.d("lunbothread","null");
+        }
+    }
 }
