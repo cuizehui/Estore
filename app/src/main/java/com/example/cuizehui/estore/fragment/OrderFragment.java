@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 public class OrderFragment extends BaseFragment {
     @BindView(R.id.all_order_Recyclerview)
     RecyclerView recyclerView;
-
+    List<OrderMessage> orderMessageList;
     OrderActivity orderActivity;
     private OrderAllAdapter orderAllAdapter;
     private User user;
@@ -53,6 +53,8 @@ public class OrderFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        Log.d("orderFragment"," oncreate");
+
         View view= inflater.inflate(R.layout.fragment_order, container, false);
         ButterKnife.bind(this,view);
         initView();
@@ -68,14 +70,15 @@ public class OrderFragment extends BaseFragment {
     private void initData() {
 
         user= MyApplication.getInstance(orderActivity).getUser();
-        List<OrderMessage> orderMessageList=DataSupport.where("username = ? ",user.getAccount()).find(OrderMessage.class);
+        orderMessageList=DataSupport.where("username = ? ",user.getAccount()).find(OrderMessage.class);
 
         //头数据预处理增加标记（原型模式）
 
         Log.d("orderMeessagelist,size:",""+orderMessageList.size());
         //筛选list   并分发下去
 
-      orderAllAdapter=new OrderAllAdapter(orderMessageList,orderActivity);
+            orderAllAdapter=new OrderAllAdapter(orderMessageList,orderActivity);
+
     }
     private void initView() {
 
@@ -97,9 +100,17 @@ public class OrderFragment extends BaseFragment {
     @Override
     public void onDestroy() {
 
-        orderAllAdapter.bitmap.recycle();
+      //  orderAllAdapter.bitmap.recycle();
         super.onDestroy();
         Log.d("orderFragment "," destroy");
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("ondestroyview","destroyview");
+
 
     }
 }

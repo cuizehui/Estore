@@ -3,6 +3,7 @@ package com.example.cuizehui.estore.adapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
     private int ITEM_HEADER = 1,ITEM_CONTENT = 2,ITEM_FOOTER = 3;
      public Bitmap bitmap;
 
+
     public OrderAllAdapter(List<OrderMessage> orderMessages, OrderActivity context) {
         super();
         this.orderMessages=orderMessages;
@@ -47,7 +49,7 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-
+        Log.d("onBIndView Holder"," positin"+position);
         holder.orderitem_pctv.setText(orderMessages.get(position).getPdname());
         holder.order_price.setText(orderMessages.get(position).getOrderprice()+"元");
         holder.order_state.setText(orderMessages.get(position).getOrderstatus());
@@ -57,8 +59,11 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
         byte[] bytes=orderMessages.get(position).getOrderpic();
 
         if(bytes!=null){
-            // 5次就会OOM 异常？  //可以进行缓存 处理 也可以进行 收回？
+            // 会OOM 异常？  //可以进行缓存 处理 也可以进行 收回
             //成员变量
+
+            BitmapFactory.Options o2 = new BitmapFactory.Options(); //这里定义了一个新的对象...获取的还是同一张图片...
+            o2.inSampleSize=1;
             bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
 
             holder.order_iv.setImageBitmap(bitmap);
@@ -66,6 +71,16 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
 
         }
 
+
+
+    }
+
+    @Override
+    public void onViewRecycled(Holder holder) {
+        super.onViewRecycled(holder);
+        Log.d("onView Recyvled","!!");
+
+        System.gc();
     }
 
     @Override
@@ -96,4 +111,6 @@ public class OrderAllAdapter extends RecyclerView.Adapter<OrderAllAdapter.Holder
             ButterKnife.bind(this,itemView);
         }
     }
+
+
 }

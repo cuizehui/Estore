@@ -50,7 +50,10 @@ public class SureOrderRecycleViewAdapter extends  RecyclerView.Adapter<SureOrder
         //处理字节图片
         byte[] bytes=shopCarData.getBytes();
         if(bytes!=null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            BitmapFactory.Options o2=new BitmapFactory.Options();
+            o2.inSampleSize=16;
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length,o2);
             holder.iv_pic.setImageBitmap(bitmap);
         }
         else {

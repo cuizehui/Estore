@@ -27,6 +27,16 @@ public class ShopDaTa  implements Serializable{
     //图片字节数组
     byte[] bitmaps ;
 
+    String bitmapUrl;
+
+    public String getBitmapUrl() {
+        return bitmapUrl;
+    }
+
+    public void setBitmapUrl(String bitmapUrl) {
+        this.bitmapUrl = bitmapUrl;
+    }
+
     public byte[] getBitmaps() {
         return bitmaps;
     }

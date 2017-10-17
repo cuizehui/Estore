@@ -206,10 +206,19 @@ public class SureOrderActivity extends BaseActivity implements PayDetailFragment
 
     //fragment  支付完成后回调
     @Override
-    public void onFragmentInteraction(String uri) {
+    public void onFragmentInteraction(final String uri) {
             Log.d("支付完成后回调","！！"+uri);
         RefrushMain refrushMain=new RefrushMain();
-        makeOrder(uri);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                makeOrder(uri);
+            }
+        }).start();
+
+
+
         if(flagwhere.equals("buy")){
            EventBus.getDefault().post(refrushMain);
         }

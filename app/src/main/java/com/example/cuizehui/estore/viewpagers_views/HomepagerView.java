@@ -290,6 +290,7 @@ public class HomepagerView extends BasePagerView {
 
                     ArrayList<ShopDaTa> arrayList=new ArrayList<>();
 
+
                     for (int i=0;i<shopDaTas.size();i++){
                         ShopDaTa shopDaTa=new ShopDaTa();
                         shopDaTa.setPicadress(shopDaTas.get(i).getPicadress());
@@ -301,7 +302,15 @@ public class HomepagerView extends BasePagerView {
                         byte[] bytes;
                         if(shopDaTas.get(i).getBitmaps()!=null){
                             bytes=shopDaTas.get(i).getBitmaps();
+
+                            //做缓存
+                            String bitmapurl=shopDaTas.get(i).getProductName()+":"+shopDaTas.get(i).getShopName();
+
+
+
+
                             Log.d("bitmap_log",bytes.length+"!null");
+                            shopDaTa.setBitmapUrl(bitmapurl);
                             shopDaTa.setBitmaps(bytes);
                         }
                         else {

@@ -6,14 +6,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="radiobutton1">首页 </string>
-    <string name="radiobutton2">抢购 </string>
-    <string name="radiobutton3">购物车 </string>
-    <string name="radiobutton4">我的 </string>
-    <string name="to_login"> 点击登录</string>
-    <string name="xianshiqiang">限时抢购</string>
-    <string name="mingpindian">名品店</string>
-    <string name="fenlei">分类</string>
-    <string name="haiwaitao">海外购</string>
+    <string name="radiobutton1">Home </string>
+    <string name="radiobutton2">flashSale </string>
+    <string name="radiobutton3">shopCar </string>
+    <string name="radiobutton4">Mine </string>
+    <string name="to_login"> LogIn</string>
+    <string name="xianshiqiang">TimeSale</string>
+    <string name="mingpindian">goodShop</string>
+    <string name="fenlei">Sort</string>
+    <string name="haiwaitao">InternetShop</string>
     <string name="productname">商品名称</string>
 </resources>

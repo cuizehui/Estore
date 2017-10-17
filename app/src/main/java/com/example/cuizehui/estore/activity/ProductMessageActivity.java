@@ -137,15 +137,15 @@ public class ProductMessageActivity extends BaseActivity {
                      if(i==0){
                         Log.d("数据库插入","");
                         userDb.insertShopCarTable(username,productname,shopname,number+"",price,bytes);
-                      }
+                     }
                     else  {
                         Log.d("数据库更新","");
                          number=number+i;
                          userDb.updataSCProductnunber(username,productname,number+"");
-                    }
 
-
-                    //执行动画
+                     }
+                        bytes=null;
+                //执行动画
                     Toast.makeText(ProductMessageActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
 
                 try {

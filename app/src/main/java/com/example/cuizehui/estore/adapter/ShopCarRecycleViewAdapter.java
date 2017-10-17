@@ -74,7 +74,11 @@ public class ShopCarRecycleViewAdapter extends RecyclerView.Adapter<ShopCarRecyc
 
         byte[] bytes=shopCarDatas.get(position).getBytes();
         if(bytes!=null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+
+            BitmapFactory.Options o2 = new BitmapFactory.Options(); //这里定义了一个新的对象...获取的还是同一张图片...
+            o2.inSampleSize=8;
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length,o2);
+
             holder.pic.setImageBitmap(bitmap);
         }
         else {

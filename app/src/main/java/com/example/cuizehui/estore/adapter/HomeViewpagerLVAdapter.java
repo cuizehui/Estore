@@ -87,14 +87,18 @@ public class HomeViewpagerLVAdapter extends BaseAdapter {
             Log.d("bitmap_bytes size:",""+bytes.length);
 
             //获取路径
+            BitmapFactory.Options o2 = new BitmapFactory.Options(); //这里定义了一个新的对象...获取的还是同一张图片...
+            o2.inSampleSize=4;
 
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length,o2);
 
             /***
              * if drawee view  !=null
              * 就 不转化bitmap
              */
             holder.draweeView.setImageBitmap(bitmap);
+
+            bytes=null;
 
 
         }
