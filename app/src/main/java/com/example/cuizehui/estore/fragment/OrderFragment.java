@@ -1,5 +1,6 @@
 package com.example.cuizehui.estore.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+@SuppressLint("ValidFragment")
 
 public class OrderFragment extends BaseFragment {
     @BindView(R.id.all_order_Recyclerview)
