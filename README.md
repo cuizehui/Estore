@@ -1,9 +1,8 @@
 # estore
-
-## 简介
-
 一个模仿淘宝商城的app 
 
+## 简介
+一个模仿淘宝商城的app 
 客户端：estore
 服务端：estoreService  使用aidl消息模仿 服务器传递数据 （estoreService）
 
