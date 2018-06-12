@@ -1,4 +1,4 @@
-# estore
+# store
 一个模仿淘宝商城的app 
 
 ## 简介
